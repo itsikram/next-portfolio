@@ -1,0 +1,17 @@
+.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  background: white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+  a {
+    margin-left: 1rem;
+    color: #1e40af;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
