@@ -1,7 +1,6 @@
 import React, {  useState } from 'react';
 import PortfolioMenu from './PortfolioMenu';
 import MenuHamburger from '@/Icons/MenuHamburger';
-import Image from 'next/image';
 const LeftSidebar = () => {
 
     const [isMobileMenu, setIsMobileMenu] = useState(false)
@@ -11,7 +10,7 @@ const LeftSidebar = () => {
             {/* <h1 className='my-name mb-2'>Md Ikram</h1> */}
             <div className='left-sidebar-container'>
                 <div className='image-container my-2'>
-                    <Image className='avatar-image' src='https://programmerikram.com/wp-content/uploads/2024/10/Ikramul-islam-transparent.png' width={'auto'} alt='Programmer Ikram' />
+                    <img className='avatar-image' src='https://programmerikram.com/wp-content/uploads/2024/10/Ikramul-islam-transparent.png' alt='Programmer Ikram' />
                 </div>
                 <div className='mobile-mene-toggle' onClick={() => setIsMobileMenu(!isMobileMenu)}>
                     <MenuHamburger />

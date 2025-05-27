@@ -3,8 +3,32 @@ import Globe from '@/Icons/Globe';
 import VsCode from '@/Icons/VsCode';
 import { Carousel } from 'react-responsive-carousel';
 import "react-responsive-carousel/lib/styles/carousel.min.css";
-import Image from 'next/image';
+
+// type _reviewType = {
+//   text: string,
+//   author: string,
+//   src: string
+// }
+
 export default function About() {
+
+  const reviews = [
+    {
+      text: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem tenetur ratione quod. 1',
+      author: 'Baish',
+      src: 'Freelancer.com'
+    },
+    {
+      text: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem tenetur ratione quod. 2',
+      author: 'Baish',
+      src: 'Freelancer.com'
+    },
+    {
+      text: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem tenetur ratione quod. 3',
+      author: 'Baish',
+      src: 'Freelancer.com'
+    },
+  ]
   return (
     <>
       {/* <Head>
@@ -25,7 +49,7 @@ export default function About() {
 
         <div className='about-info-container'>
           <div className='about-info-image'>
-            <Image src={'https://programmerikram.com/wp-content/uploads/2025/05/ikramul-islam-scaled.jpg'}  alt=''/>
+            <img src={'https://programmerikram.com/wp-content/uploads/2025/05/ikramul-islam-scaled.jpg'} alt='' />
           </div>
           <div className='about-info-details'>
             <h2 className='about-info-title color-wh'>
@@ -48,13 +72,18 @@ export default function About() {
                   <td>:  Bangladeshi</td>
                 </tr>
                 <tr>
+                  <td>Experience</td>
+                  <td>:  5+ Years</td>
+                </tr>
+                <tr>
                   <td>Languages</td>
                   <td>:  English, Bangali, Hindi </td>
                 </tr>
                 <tr>
                   <td>Address</td>
-                  <td>:  Baikhar, Munshiganj, Dhaka, Bangladesh</td>
+                  <td>: Dhaka, Bangladesh</td>
                 </tr>
+
 
                 <tr>
                   <td>Freelance</td>
@@ -131,31 +160,27 @@ export default function About() {
 
         <div className='about-reviews-container'>
           <Carousel showThumbs={false} autoPlay infiniteLoop>
-            <div>
-              <div className='about-review'>
-                <p className='review-text'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem tenetur ratione quod.</p>
-                <h4 className='review-author'>Baish</h4>
-                <span className='review-src'>Freelancer.com</span>
-              </div>
-            </div>
-            <div>
-              <div className='about-review'>
-                <p className='review-text'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem tenetur ratione quod.</p>
-                <h4 className='review-author'>Baish</h4>
-                <span className='review-src'>Freelancer.com</span>
-              </div>
-            </div>
-            <div>
-              <div className='about-review'>
-                <p className='review-text'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem tenetur ratione quod.</p>
-                <h4 className='review-author'>Baish</h4>
-                <span className='review-src'>Freelancer.com</span>
-              </div>
-            </div>
+            {reviews.map((review, key) => {
+
+              return (
+                <div key={key}>
+                  <div className='about-review'>
+                    <p className='review-text'>{review.text}</p>
+                    <h4 className='review-author'>{review.author}</h4>
+                    <span className='review-src'>{review.src}</span>
+                  </div>
+                </div>
+              )
+
+            })}
+
+          
           </Carousel>
         </div>
       </section>
 
     </>
   );
+
+
 }

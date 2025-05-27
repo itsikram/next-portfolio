@@ -3,7 +3,6 @@ import SearchPlus from '@/Icons/SearchPlus';
 import Link2AngularRight from '@/Icons/Link2AngularRight';
 import { useRouter } from 'next/router';
 import PortfolioSkleton from '@/skletons/portfolio/portfolioSkleton';
-import Image from 'next/image';
 import { GetStaticProps } from 'next';
 
 type Portfolio = {
@@ -90,7 +89,7 @@ const handlePortfolioView = useCallback(
 
                                     </a>
                                 </div>
-                                <Image src={`${portfolio?.meta?._ps_portfolio_image}`} onError={(e) => {(e.target as HTMLImageElement).style.height = '100px';}}  alt=''/>
+                                <img src={`${portfolio?.meta?._ps_portfolio_image}`} onError={(e) => {(e.target as HTMLImageElement).style.height = '100px';}}  alt=''/>
                             </div>
                             <div className='portfolio-details-container'>
                                 <h3 className='portfolio-title' title={portfolio.title.rendered}>{truncateText(portfolio.title.rendered, 25)}</h3>
@@ -128,8 +127,7 @@ export const getStaticProps: GetStaticProps<Props> = async () => {
   return {
     props: {
       portfolios: data,
-    },
-    revalidate: 10,
+    }
   };
 };
 

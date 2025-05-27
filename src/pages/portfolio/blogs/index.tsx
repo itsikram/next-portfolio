@@ -5,7 +5,6 @@ import SearchPlus from '@/Icons/SearchPlus';
 import Link2AngularRight from '@/Icons/Link2AngularRight';
 import Link from 'next/link';
 import BlogSkleton from '@/skletons/blogs/blogSkleton';
-import Image from 'next/image';
 import { GetStaticProps } from 'next';
 
 type Blog = {
@@ -90,7 +89,7 @@ export default function Blog() {
 
                     </Link>
                   </div>
-                  <Image src={`${blog?.meta && blog.meta?._blog_image}`} onError={(e) => { (e.target as HTMLImageElement).style.height = '100px';}}  alt=''/>
+                  <img src={`${blog?.meta && blog.meta?._blog_image}`} onError={(e) => { (e.target as HTMLImageElement).style.height = '100px';}}  alt=''/>
                 </div>
                 <div className='blog-details-container'>
                   <h3 className='blog-title' title={blog.title.rendered}>{truncateText(blog.title.rendered, 25)}</h3>
@@ -131,8 +130,6 @@ export const getStaticProps: GetStaticProps<Props> = async () => {
   return {
     props: {
       blogs: data,
-    },
-    // Re-generate the page at most once every 10 seconds (ISR)
-    revalidate: 10,
+    }
   };
 };
