@@ -12,7 +12,7 @@ const PortfolioMenu = ({setIsMobileMenu}: PortfolioMenuProps) => {
 
             <ul className='portfolio-menu'>
                 <li onClick={() => setIsMobileMenu(false)} className={`portfolio-menu-item ${pathname === '/' ? 'active' : ''}`}>
-                    <Link href='/portfolio'>Home</Link>
+                    <Link href='/'>Home</Link>
                 </li>
                 <li onClick={() => setIsMobileMenu(false)}  className={`portfolio-menu-item ${pathname === '/about' ? 'active' : ''}`}>
                     <Link href='/about'>About</Link>
