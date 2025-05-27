@@ -29,6 +29,9 @@ const PortfolioMenu = ({setIsMobileMenu}: PortfolioMenuProps) => {
                 <li onClick={() => setIsMobileMenu(false)}  className={`portfolio-menu-item ${pathname === '/contact' ? 'active' : ''}`}>
                     <Link href='/contact'>Contact </Link>
                 </li>
+                <li onClick={() => setIsMobileMenu(false)}  className={`portfolio-menu-item ${pathname === '/contact' ? 'active' : ''}`}>
+                    <Link href='https://programmerikram.com'>Go To Connect </Link>
+                </li>
             </ul>
         </div>
     );
