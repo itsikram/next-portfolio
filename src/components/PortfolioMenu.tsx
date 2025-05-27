@@ -11,23 +11,23 @@ const PortfolioMenu = ({setIsMobileMenu}: PortfolioMenuProps) => {
         <div className='portfolio-menu-container'>
 
             <ul className='portfolio-menu'>
-                <li onClick={() => setIsMobileMenu(false)} className={`portfolio-menu-item ${pathname === '/portfolio' ? 'active' : ''}`}>
+                <li onClick={() => setIsMobileMenu(false)} className={`portfolio-menu-item ${pathname === '/' ? 'active' : ''}`}>
                     <Link href='/portfolio'>Home</Link>
                 </li>
-                <li onClick={() => setIsMobileMenu(false)}  className={`portfolio-menu-item ${pathname === '/portfolio/about' ? 'active' : ''}`}>
-                    <Link href='/portfolio/about'>About</Link>
+                <li onClick={() => setIsMobileMenu(false)}  className={`portfolio-menu-item ${pathname === '/about' ? 'active' : ''}`}>
+                    <Link href='/about'>About</Link>
                 </li>
-                <li onClick={() => setIsMobileMenu(false)}  className={`portfolio-menu-item ${pathname === '/portfolio/resume' ? 'active' : ''}`}>
-                    <Link href='/portfolio/resume'>Resume</Link>
+                <li onClick={() => setIsMobileMenu(false)}  className={`portfolio-menu-item ${pathname === '/resume' ? 'active' : ''}`}>
+                    <Link href='/resume'>Resume</Link>
                 </li>
-                <li onClick={() => setIsMobileMenu(false)}  className={`portfolio-menu-item ${pathname === '/portfolio/portfolio' ? 'active' : ''}`}>
-                    <Link href='/portfolio/portfolio'>Portfolio</Link>
+                <li onClick={() => setIsMobileMenu(false)}  className={`portfolio-menu-item ${pathname === '/portfolio' ? 'active' : ''}`}>
+                    <Link href='/portfolio'>Portfolio</Link>
                 </li>
-                <li onClick={() => setIsMobileMenu(false)}  className={`portfolio-menu-item ${pathname === '/portfolio/blogs' ? 'active' : ''}`}>
-                    <Link href='/portfolio/blogs'>Blogs</Link>
+                <li onClick={() => setIsMobileMenu(false)}  className={`portfolio-menu-item ${pathname === '/blogs' ? 'active' : ''}`}>
+                    <Link href='/blogs'>Blogs</Link>
                 </li>
-                <li onClick={() => setIsMobileMenu(false)}  className={`portfolio-menu-item ${pathname === '/portfolio/contact' ? 'active' : ''}`}>
-                    <Link href='/portfolio/contact'>Contact </Link>
+                <li onClick={() => setIsMobileMenu(false)}  className={`portfolio-menu-item ${pathname === '/contact' ? 'active' : ''}`}>
+                    <Link href='/contact'>Contact </Link>
                 </li>
             </ul>
         </div>
