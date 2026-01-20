@@ -153,7 +153,7 @@ export const getStaticProps: GetStaticProps<Props> = async () => {
       content: { rendered: "Website performance optimization project achieving 90+ PageSpeed scores through code optimization and caching strategies." },
       meta: {
         _ps_portfolio_url: "https://example.com/performance-project",
-        _ps_portfolio_image: "images/profile.jpg"
+        _ps_portfolio_image: "/images/profile.jpg"
       }
     },
     {

@@ -23,6 +23,9 @@ const PortfolioMenu = ({setIsMobileMenu}: PortfolioMenuProps) => {
                 <li onClick={() => setIsMobileMenu(false)}  className={`portfolio-menu-item ${pathname === '/portfolio' ? 'active' : ''}`}>
                     <Link href='/portfolio'>Portfolio</Link>
                 </li>
+                <li onClick={() => setIsMobileMenu(false)}  className={`portfolio-menu-item ${pathname === '/services' ? 'active' : ''}`}>
+                    <Link href='/services'>Services</Link>
+                </li>
                 <li onClick={() => setIsMobileMenu(false)}  className={`portfolio-menu-item ${pathname === '/blogs' ? 'active' : ''}`}>
                     <Link href='/blogs'>Blogs</Link>
                 </li>

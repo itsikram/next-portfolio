@@ -40,7 +40,7 @@ export default function Blog({ blogs }: Props) {
     (e: React.MouseEvent<HTMLElement>) => {
       const blogId = e.currentTarget.dataset.id;
     if (blogId) {
-      router.push(`/portfolio/blogs/${blogId}`);
+      router.push(`/blogs/${blogId}`);
     }
     },
     [router] // Add any dependencies here if needed
@@ -75,7 +75,7 @@ export default function Blog({ blogs }: Props) {
                     <a className='view-button'>
                       <SearchPlus />
                     </a>
-                    <Link href={`/portfolio//blogs/${blog.id}`}>
+                    <Link href={`/blogs/${blog.id}`}>
 
                       <Link2AngularRight />
 

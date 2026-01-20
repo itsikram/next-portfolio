@@ -1,3 +1,5 @@
+'use client';
+
 import React, {  useState } from 'react';
 import PortfolioMenu from './PortfolioMenu';
 import MenuHamburger from '@/Icons/MenuHamburger';

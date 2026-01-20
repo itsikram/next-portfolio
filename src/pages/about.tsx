@@ -52,7 +52,7 @@ export default function About() {
 
         <div className='about-info-container'>
           <div className='about-info-image'>
-            <Image src={'/images/profile.jpg'} alt='Md Ikram' width={300} height={300} />
+            <Image src={'/images/profile.jpg'} alt='Md Ikram' className='profile-image' fill />
           </div>
           <div className='about-info-details'>
             <h2 className='about-info-title color-wh'>
