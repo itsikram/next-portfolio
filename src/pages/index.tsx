@@ -1,6 +1,8 @@
 import Head from 'next/head';
 import SocialIcons from '@/components/SocialIcons';
-import { Github, Linkedin, Mail, Download } from 'lucide-react';
+import { Mail, Download } from 'lucide-react';
+import Link from 'next/link';
+import Image from 'next/image';
 import '../styles/home-styles.scss';
 
 export default function Home() {
@@ -15,7 +17,7 @@ export default function Home() {
                 <div className='hero-content'>
                     <div className='hero-text'>
                         <h1 className="home-title color-wh">
-                            Hi, I'm <span className='color-pc'>Md Ikram</span>
+                            Hi, I&apos;m <span className='color-pc'>Md Ikram</span>
                         </h1>
                         <h2 className="home-subtitle color-tc">
                             Full Stack Developer
@@ -27,10 +29,10 @@ export default function Home() {
                         </p>
                         
                         <div className='hero-buttons'>
-                            <a href='/contact' className='btn-primary'>
+                            <Link href='/contact' className='btn-primary'>
                                 <Mail size={20} />
                                 Get In Touch
-                            </a>
+                            </Link>
                             <a href='/Senior Software Developer.pdf' download className='btn-secondary'>
                                 <Download size={20} />
                                 Download CV
@@ -40,7 +42,7 @@ export default function Home() {
                     
                     <div className='hero-image'>
                         <div className='profile-card'>
-                            <img src='/images/profile.jpg' alt='Md Ikram' />
+                            <Image src='/images/profile.jpg' alt='Md Ikram' width={350} height={350} />
                             <div className='card-overlay'>
                                 <h3>Md Ikram</h3>
                                 <p>Full Stack Developer</p>
