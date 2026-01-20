@@ -1,4 +1,5 @@
 import '../styles/globals.scss'
+import '../styles/home-styles.scss'
 import type { AppProps } from 'next/app'
 import PortfolioContainer from '@/components/PortfolioContainer'
 

@@ -3,7 +3,6 @@ import SocialIcons from '@/components/SocialIcons';
 import { Mail, Download } from 'lucide-react';
 import Link from 'next/link';
 import Image from 'next/image';
-import '../styles/home-styles.scss';
 
 export default function Home() {
     return (

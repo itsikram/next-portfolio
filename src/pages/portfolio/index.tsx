@@ -4,6 +4,7 @@ import Link2AngularRight from '@/Icons/Link2AngularRight';
 import { useRouter } from 'next/router';
 import PortfolioSkleton from '@/skletons/portfolio/portfolioSkleton';
 import { GetStaticProps } from 'next';
+import Image from 'next/image';
 
 type Portfolio = {
   id: number;
@@ -80,7 +81,7 @@ const handlePortfolioView = useCallback(
 
                                     </a>
                                 </div>
-                                <img src={`${portfolio?.meta?._ps_portfolio_image}`} onError={(e) => {(e.target as HTMLImageElement).style.height = '100px';}}  alt=''/>
+                                <Image src={`${portfolio?.meta?._ps_portfolio_image}`} onError={(e) => {(e.target as HTMLImageElement).style.height = '100px';}}  alt='' width={400} height={250} />
                             </div>
                             <div className='portfolio-details-container'>
                                 <h3 className='portfolio-title' title={portfolio.title.rendered}>{truncateText(portfolio.title.rendered, 25)}</h3>

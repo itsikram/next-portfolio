@@ -5,6 +5,7 @@ import { Carousel } from 'react-responsive-carousel';
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import SkillsSection from '@/components/SkillsSection';
 import ContactInfo from '@/components/ContactInfo';
+import Image from 'next/image';
 
 // type _reviewType = {
 //   text: string,
@@ -51,7 +52,7 @@ export default function About() {
 
         <div className='about-info-container'>
           <div className='about-info-image'>
-            <img src={'/images/profile.jpg'} alt='Md Ikram' />
+            <Image src={'/images/profile.jpg'} alt='Md Ikram' width={300} height={300} />
           </div>
           <div className='about-info-details'>
             <h2 className='about-info-title color-wh'>
