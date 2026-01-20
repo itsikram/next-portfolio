@@ -1,101 +1,76 @@
 import Head from 'next/head';
 import ParticlesBackground from '@/components/ParticlesBackground';
 import SocialIcons from '@/components/SocialIcons';
-import ProgressBar from '@/components/ProgressBar';
-import EducationTimeline from '@/components/EducationTimeline';
-import ExperienceTimeline from '@/components/ExperienceTimeline';
-import Briefcase from '@/Icons/Briefcase';
-import GraduationCap from '@/Icons/GraduationCap';
+import { Github, Linkedin, Mail, Download } from 'lucide-react';
+import '../styles/home-styles.scss';
+
 export default function Home() {
-
-
-    return (
-         <>
-            {/* <Head>
-                <title>Home - Portfolio of Md Ikram</title>
-            </Head> */}
-            <section id='resume'>
-                <h2 className="resume-title color-wh">
-                    <span>
-                        My Skills
-
-                    </span>
-
-                    <div className='title-border'>
-
-                        <div className='title-border-width'></div>
-                    </div>
-                </h2>
-
-                <div className='resume-skill-container'>
-                    <ProgressBar title={'HTML'} percent={98} />
-                    <ProgressBar title={'CSS'} percent={95} />
-                    <ProgressBar title={'javaScript'} percent={80} />
-                    <ProgressBar title={'jQuery'} percent={90} />
-                    <ProgressBar title={'PHP'} percent={85} />
-                    <ProgressBar title={'Node.js'} percent={70} />
-                    <ProgressBar title={'React'} percent={85} />
-                    <ProgressBar title={'Bootsrap'} percent={85} />
-                    <ProgressBar title={'WordPress'} percent={95} />
-                    <ProgressBar title={'Laravel'} percent={40} />
-                </div>
-
-                <h2 className="resume-title color-wh">
-                    <span>
-                        Resume
-                    </span>
-
-                    <div className='title-border'>
-                        <div className='title-border-width'></div>
-                    </div>
-                </h2>
-                {/* <div className="timeline">
-                    <div className="dot"></div>
-                    <div className="dot"></div>
-                    <div className="dot"></div>
-                </div> */}
-
-
-
-                <div className='resume-experience-container'>
-                    <h3 className='section-title'>
-                        <Briefcase />
-                        Work Experience
-                    </h3>
-                    <ExperienceTimeline />
-
-                </div>
-                <div className='resume-education-container'>
-                    <h3 className='section-title'>
-                        <GraduationCap />
-                        Education
-                    </h3>
-                    <EducationTimeline />
-
-                </div>
-
-
-
-
-            </section>
-
-        </>
-    )
-
     return (
         <>
             <Head>
                 <title>Home - Portfolio of Md Ikram</title>
+                <meta name="description" content="Full Stack WordPress & MERN Developer with 5+ years of experience" />
             </Head>
+            
             <section id='home'>
-                <h1 className="font-bold home-title color-wh">Hi, I am <span className='color-pc'>Md Ikram</span></h1>
-                <p className='color-tc home-desc'>I am a frontend web developer. I can provide clean code and pixel perfect design. I also make website more & more interactive with web animations.</p>
+                <div className='hero-content'>
+                    <div className='hero-text'>
+                        <h1 className="home-title color-wh">
+                            Hi, I'm <span className='color-pc'>Md Ikram</span>
+                        </h1>
+                        <h2 className="home-subtitle color-tc">
+                            Full Stack Developer
+                        </h2>
+                        <p className='home-desc color-tc'>
+                            Crafting exceptional digital experiences with clean code and pixel-perfect design. 
+                            Specialized in WordPress, MERN stack, and creating interactive web applications 
+                            that drive business growth.
+                        </p>
+                        
+                        <div className='hero-buttons'>
+                            <a href='/contact' className='btn-primary'>
+                                <Mail size={20} />
+                                Get In Touch
+                            </a>
+                            <a href='/Senior Software Developer.pdf' download className='btn-secondary'>
+                                <Download size={20} />
+                                Download CV
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div className='hero-image'>
+                        <div className='profile-card'>
+                            <img src='/images/profile.jpg' alt='Md Ikram' />
+                            <div className='card-overlay'>
+                                <h3>Md Ikram</h3>
+                                <p>Full Stack Developer</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div className='hero-stats'>
+                    <div className='stat-item'>
+                        <h3 className='color-pc'>5+</h3>
+                        <p className='color-tc'>Years Experience</p>
+                    </div>
+                    <div className='stat-item'>
+                        <h3 className='color-pc'>50+</h3>
+                        <p className='color-tc'>Projects Completed</p>
+                    </div>
+                    <div className='stat-item'>
+                        <h3 className='color-pc'>30+</h3>
+                        <p className='color-tc'>Happy Clients</p>
+                    </div>
+                </div>
+                
                 <div className='social-media-container'>
                     <SocialIcons />
                 </div>
             </section>
+            
             <ParticlesBackground />
-
         </>
     );
 }

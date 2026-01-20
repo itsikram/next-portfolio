@@ -3,6 +3,8 @@ import Globe from '@/Icons/Globe';
 import VsCode from '@/Icons/VsCode';
 import { Carousel } from 'react-responsive-carousel';
 import "react-responsive-carousel/lib/styles/carousel.min.css";
+import SkillsSection from '@/components/SkillsSection';
+import ContactInfo from '@/components/ContactInfo';
 
 // type _reviewType = {
 //   text: string,
@@ -49,7 +51,7 @@ export default function About() {
 
         <div className='about-info-container'>
           <div className='about-info-image'>
-            <img src={'https://programmerikram.com/wp-content/uploads/2025/05/ikramul-islam-scaled.jpg'} alt='' />
+            <img src={'/images/profile.jpg'} alt='Md Ikram' />
           </div>
           <div className='about-info-details'>
             <h2 className='about-info-title color-wh'>
@@ -62,6 +64,10 @@ export default function About() {
                 <tr>
                   <td>Full Name</td>
                   <td>:  Md Ikram</td>
+                </tr>
+                <tr>
+                  <td>Date of Birth</td>
+                  <td>:  16/07/2003</td>
                 </tr>
                 <tr>
                   <td>Age</td>
@@ -77,14 +83,20 @@ export default function About() {
                 </tr>
                 <tr>
                   <td>Languages</td>
-                  <td>:  English, Bangali, Hindi </td>
+                  <td>:  English, Bengali</td>
                 </tr>
                 <tr>
                   <td>Address</td>
-                  <td>: Dhaka, Bangladesh</td>
+                  <td>: Biler Kani, Munshiganj, Bangladesh</td>
                 </tr>
-
-
+                <tr>
+                  <td>Mobile</td>
+                  <td>: +8801581400711</td>
+                </tr>
+                <tr>
+                  <td>Email</td>
+                  <td>: mdikram295@gmail.com</td>
+                </tr>
                 <tr>
                   <td>Freelance</td>
                   <td>:  Available </td>
@@ -92,9 +104,9 @@ export default function About() {
               </tbody>
             </table>
             <p className='about-info-desc color-tc'>
-              I am a frontend web developer. I can provide clean code and pixel perfect design. I also make website more & more interactive with web animations.
+              Full Stack WordPress & MERN Developer with 5+ years of experience delivering high-performance websites and scalable applications for global clients. Specialized in custom WordPress architecture, React-based interfaces, and performance optimization with a strong focus on user experience and business growth.
             </p>
-            <a className='about-info-button color-wh' download={true} href='https://programmerikram.com/wp-content/uploads/2025/03/Md-Ikram-cv-WordPress-Developer.pdf'>Download Cv</a>
+            <a className='about-info-button color-wh' download={true} href='/Senior Software Developer.pdf'>Download Cv</a>
           </div>
         </div>
 
@@ -116,10 +128,10 @@ export default function About() {
               <Brush />
             </div>
 
-            <h3 className='service-title'>Web Design</h3>
+            <h3 className='service-title'>WordPress Development</h3>
             <div className='separator'></div>
             <p className='service-desc'>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem tenetur ratione quod.
+              Custom WordPress themes, plugins, and full-stack solutions with performance optimization and SEO best practices.
             </p>
           </div>
           <div className='about-service'>
@@ -127,10 +139,10 @@ export default function About() {
               <VsCode />
             </div>
 
-            <h3 className='service-title'>Web Development</h3>
+            <h3 className='service-title'>MERN Stack Development</h3>
             <div className='separator'></div>
             <p className='service-desc'>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem tenetur ratione quod.
+              Full-stack web applications using MongoDB, Express.js, React.js, and Node.js with scalable architecture.
             </p>
           </div>
           <div className='about-service'>
@@ -138,13 +150,15 @@ export default function About() {
               <Globe />
             </div>
 
-            <h3 className='service-title'>UI/UX</h3>
+            <h3 className='service-title'>Performance Optimization</h3>
             <div className='separator'></div>
             <p className='service-desc'>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem tenetur ratione quod.
+              Website speed optimization, code optimization, and performance tuning for better user experience and search rankings.
             </p>
           </div>
         </div>
+
+        <SkillsSection />
 
         <h2 className="about-title color-wh">
           <span>
@@ -177,6 +191,8 @@ export default function About() {
           
           </Carousel>
         </div>
+
+        <ContactInfo />
       </section>
 
     </>

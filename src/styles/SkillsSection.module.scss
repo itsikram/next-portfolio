@@ -1,0 +1,137 @@
+.skillsContainer {
+  margin: 60px 0;
+  
+  .about-title {
+    text-align: center;
+    margin-bottom: 50px;
+    
+    span {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: #fff;
+      position: relative;
+      display: inline-block;
+    }
+    
+    .title-border {
+      margin-top: 15px;
+      
+      .title-border-width {
+        height: 3px;
+        background: linear-gradient(90deg, #0070f3, #7928ca);
+        width: 80px;
+        margin: 0 auto;
+        border-radius: 2px;
+      }
+    }
+  }
+  
+  .skillsGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-bottom: 50px;
+  }
+  
+  .skillCategory {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 15px;
+    padding: 25px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+    
+    &:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 30px rgba(0, 112, 243, 0.2);
+      border-color: rgba(0, 112, 243, 0.3);
+    }
+  }
+  
+  .categoryTitle {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: #0070f3;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  .skillList {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  
+  .skillTag {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    
+    &:hover {
+      transform: scale(1.05);
+      box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+    }
+  }
+  
+  .strengthsSection {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 15px;
+    padding: 30px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    
+    .categoryTitle {
+      text-align: center;
+      margin-bottom: 25px;
+      color: #7928ca;
+    }
+    
+    .strengthsList {
+      list-style: none;
+      padding: 0;
+      
+      li {
+        color: #fff;
+        font-size: 1.1rem;
+        margin-bottom: 15px;
+        padding-left: 30px;
+        position: relative;
+        
+        &:before {
+          content: "✓";
+          position: absolute;
+          left: 0;
+          color: #0070f3;
+          font-weight: bold;
+          font-size: 1.2rem;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .skillsContainer {
+    .skillsGrid {
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+    
+    .skillCategory {
+      padding: 20px;
+    }
+    
+    .categoryTitle {
+      font-size: 1.1rem;
+    }
+    
+    .skillTag {
+      font-size: 0.8rem;
+      padding: 6px 12px;
+    }
+  }
+}

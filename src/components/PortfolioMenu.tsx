@@ -11,13 +11,13 @@ const PortfolioMenu = ({setIsMobileMenu}: PortfolioMenuProps) => {
         <div className='portfolio-menu-container'>
 
             <ul className='portfolio-menu'>
-                <li onClick={() => setIsMobileMenu(false)} className={`portfolio-menu-item ${pathname === '/resume' ? 'active' : ''}`}>
+                <li onClick={() => setIsMobileMenu(false)} className={`portfolio-menu-item ${pathname === '/' ? 'active' : ''}`}>
                     <Link href='/'>Home</Link>
                 </li>
                 <li onClick={() => setIsMobileMenu(false)}  className={`portfolio-menu-item ${pathname === '/about' ? 'active' : ''}`}>
                     <Link href='/about'>About</Link>
                 </li>
-                <li onClick={() => setIsMobileMenu(false)}  className={`portfolio-menu-item ${pathname === '/' ? 'active' : ''}`}>
+                <li onClick={() => setIsMobileMenu(false)}  className={`portfolio-menu-item ${pathname === '/resume' ? 'active' : ''}`}>
                     <Link href='/resume'>Resume</Link>
                 </li>
                 <li onClick={() => setIsMobileMenu(false)}  className={`portfolio-menu-item ${pathname === '/portfolio' ? 'active' : ''}`}>
@@ -29,8 +29,8 @@ const PortfolioMenu = ({setIsMobileMenu}: PortfolioMenuProps) => {
                 <li onClick={() => setIsMobileMenu(false)}  className={`portfolio-menu-item ${pathname === '/contact' ? 'active' : ''}`}>
                     <Link href='/contact'>Contact </Link>
                 </li>
-                <li onClick={() => setIsMobileMenu(false)}  className={`portfolio-menu-item ${pathname === '/contact' ? 'active' : ''}`}>
-                    <Link href='https://programmerikram.com'>Go To Connect </Link>
+                <li onClick={() => setIsMobileMenu(false)}>
+                    <Link href='https://programmerikram.com' target='_blank' rel='noopener noreferrer'>Go To Connect </Link>
                 </li>
             </ul>
         </div>

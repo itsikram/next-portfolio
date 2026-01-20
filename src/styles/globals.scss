@@ -178,27 +178,169 @@ body {
     }
 
     #home {
-        text-align: center;
         display: flex;
         justify-content: center;
         align-items: center;
         height: 100vh;
-        flex-direction: column;
+        padding: 0 20px;
+        position: relative;
+        z-index: 1;
 
-        h1 {
-            font-size: 60px;
-            margin: 0 !important;
-            font-weight: blod;
-            line-height: 1;
+        .hero-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 60px;
+            max-width: 1200px;
+            width: 100%;
+            margin-bottom: 40px;
         }
 
-        .home-desc {
-            color: red;
-            font-size: 22px;
-            margin: 10px 0;
+        .hero-text {
+            flex: 1;
+            text-align: left;
+
+            .home-title {
+                font-size: 60px;
+                margin: 0 0 10px 0 !important;
+                font-weight: 800;
+                line-height: 1.1;
+                animation: fadeInUp 0.8s ease-out;
+            }
+
+            .home-subtitle {
+                font-size: 32px;
+                margin: 0 0 20px 0;
+                font-weight: 600;
+                animation: fadeInUp 0.8s ease-out 0.2s both;
+            }
+
+            .home-desc {
+                color: $tc !important;
+                font-size: 18px;
+                margin: 0 0 30px 0;
+                line-height: 1.6;
+                max-width: 500px;
+                animation: fadeInUp 0.8s ease-out 0.4s both;
+            }
+
+            .hero-buttons {
+                display: flex;
+                gap: 20px;
+                animation: fadeInUp 0.8s ease-out 0.6s both;
+
+                .btn-primary, .btn-secondary {
+                    display: flex;
+                    align-items: center;
+                    gap: 10px;
+                    padding: 15px 30px;
+                    border-radius: 50px;
+                    text-decoration: none;
+                    font-weight: 600;
+                    font-size: 16px;
+                    transition: all 0.3s ease;
+                    border: 2px solid transparent;
+                }
+
+                .btn-primary {
+                    background: linear-gradient(135deg, #0070f3, #7928ca);
+                    color: white;
+
+                    &:hover {
+                        transform: translateY(-3px);
+                        box-shadow: 0 10px 25px rgba(0, 112, 243, 0.3);
+                    }
+                }
+
+                .btn-secondary {
+                    background: transparent;
+                    color: $pc;
+                    border-color: $pc;
+
+                    &:hover {
+                        background: $pc;
+                        color: white;
+                        transform: translateY(-3px);
+                    }
+                }
+            }
+        }
+
+        .hero-image {
+            flex: 0 0 400px;
+
+            .profile-card {
+                position: relative;
+                width: 350px;
+                height: 350px;
+                border-radius: 20px;
+                overflow: hidden;
+                animation: fadeInUp 0.8s ease-out 0.8s both;
+                box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+                border: 3px solid rgba(0, 112, 243, 0.3);
+
+                img {
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                    transition: transform 0.3s ease;
+                }
+
+                .card-overlay {
+                    position: absolute;
+                    bottom: 0;
+                    left: 0;
+                    right: 0;
+                    background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+                    padding: 30px 20px 20px;
+                    text-align: center;
+
+                    h3 {
+                        color: white;
+                        margin: 0 0 5px 0;
+                        font-size: 24px;
+                    }
+
+                    p {
+                        color: $tc;
+                        margin: 0;
+                        font-size: 14px;
+                    }
+                }
+
+                &:hover img {
+                    transform: scale(1.05);
+                }
+            }
+        }
+
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 60px;
+            margin-bottom: 40px;
+            animation: fadeInUp 0.8s ease-out 1s both;
+
+            .stat-item {
+                text-align: center;
+
+                h3 {
+                    font-size: 36px;
+                    font-weight: 800;
+                    margin: 0 0 5px 0;
+                }
+
+                p {
+                    font-size: 14px;
+                    margin: 0;
+                    text-transform: uppercase;
+                    letter-spacing: 1px;
+                }
+            }
         }
 
         .social-media-container {
+            animation: fadeInUp 0.8s ease-out 1.2s both;
 
             .flex {
                 display: flex;
@@ -208,34 +350,51 @@ body {
 
             a {
                 color: $tc;
-                margin: 0 5px;
-                padding: 10px;
+                margin: 0 10px;
+                padding: 12px;
                 display: flex;
                 align-items: center;
                 justify-content: center;
                 border-radius: 50%;
-                border: 1px solid $border_color;
-                transition: 0.3s;
+                border: 2px solid $border_color;
+                transition: all 0.3s ease;
+                background: rgba(255, 255, 255, 0.05);
+                backdrop-filter: blur(10px);
 
                 svg {
-                    // color: $tc;
+                    color: $tc;
+                    transition: color 0.3s ease;
+                }
 
+                &:hover {
+                    background: $pc;
+                    border-color: $pc;
+                    transform: translateY(-3px);
+                    box-shadow: 0 5px 15px rgba(0, 112, 243, 0.3);
+
+                    svg {
+                        color: white;
+                    }
                 }
             }
+        }
+    }
 
-            a:hover {
-                background-color: $content_bg;
-                color: #fff;
-            }
-
-
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
         }
     }
 
     #about {
         height: 100%;
         padding: 100px 20px;
-        margin-bottom: 1000px;
+        margin-bottom: 50px;
 
         .about-title {
             margin: 0;
@@ -1033,7 +1192,9 @@ body {
 }
 
 @media only screen and (max-width: 768px) {
-
+    .hero-content {
+        margin-top: 100px;
+    }
     .portfolio-page-container {
 
         .left-sidebar {
@@ -1069,7 +1230,67 @@ body {
         }
 
         #home {
-            padding: 0 20px;
+            padding: 20px;
+            height: auto;
+            min-height: 100vh;
+
+            .hero-content {
+                flex-direction: column;
+                gap: 40px;
+                text-align: center;
+            }
+
+            .hero-text {
+                text-align: center;
+
+                .home-title {
+                    font-size: 40px !important;
+                }
+
+                .home-subtitle {
+                    font-size: 24px !important;
+                }
+
+                .home-desc {
+                    font-size: 16px !important;
+                    max-width: 100%;
+                }
+
+                .hero-buttons {
+                    flex-direction: column;
+                    align-items: center;
+                    gap: 15px;
+
+                    .btn-primary, .btn-secondary {
+                        width: 200px;
+                        justify-content: center;
+                    }
+                }
+            }
+
+            .hero-image {
+                flex: 0 0 auto;
+
+                .profile-card {
+                    width: 280px;
+                    height: 280px;
+                    margin: 0 auto;
+                }
+            }
+
+            .hero-stats {
+                gap: 30px;
+
+                .stat-item {
+                    h3 {
+                        font-size: 28px !important;
+                    }
+
+                    p {
+                        font-size: 12px !important;
+                    }
+                }
+            }
         }
 
         #about {

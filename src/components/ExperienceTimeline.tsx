@@ -2,25 +2,32 @@ import styles from '../styles/ExperienceTimeline.module.scss';
 
 const experiences = [
   {
-    time: '09/2020 - Present',
-    role: 'WordPress Developer',
-    company: 'Fiverr.com',
+    time: 'March 2025 - Now',
+    role: 'Senior Software Developer',
+    company: 'Lexidom Agency',
     description:
-      'I had 70+ five star review on my old fiver account. I worked there as wordpress developer. Because of my mistake I lost my old account now trying to rank one more account',
+      'Leading software development projects and delivering high-performance solutions for global clients.',
   },
   {
-    time: '05/2021 - 02/2022',
-    role: 'MERN Developer',
+    time: 'March 2024 - July 2024',
+    role: 'WordPress Problem Solver',
+    company: 'BdCalling It Ltd.',
+    description:
+      'Provided expert WordPress solutions and custom coding support at Banasree, Rampura office.',
+  },
+  {
+    time: 'February 2023 - July 2024',
+    role: 'Custom WordPress Developer',
     company: 'Freelancer.com',
     description:
-      'I have 7 five star reviews and I worked there as a MERN Stack Application Developer',
+      'Developed custom WordPress websites and solutions for international clients with focus on performance and scalability.',
   },
   {
-    time: '06/2024 - 10/2024',
-    role: 'WordPress Problem Solver',
-    company: 'BdCalling It Ltd',
+    time: 'November 2020 - January 2025',
+    role: 'WordPress Theme Developer',
+    company: 'Fiverr.com',
     description:
-      'BdCalling was my first office job. there have not programmer. I was the only programmer who know coding. My responsiblities was fix there elementor developer\'s issues and do Custom coding ',
+      'Created and customized WordPress themes, delivering high-quality solutions with excellent client satisfaction.',
   },
 ];
 

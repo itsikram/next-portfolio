@@ -2,25 +2,18 @@ import styles from '../styles/EducationTimeline.module.scss';
 
 const educations = [
   {
-    time: '2018 - Present',
-    role: 'Frontend Web Developer',
-    company: 'Abc Company',
+    time: '2023',
+    role: 'Higher Secondary Certificate (H.S.C)',
+    company: 'Govt. Haraganga College, Munshiganj',
     description:
-      'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quas, magni mollitia, aspernatur consequatur accusamus vero eum facere exercitationem velit suscipit ipsam placeat libero. Deleniti exercitationem nostrum quasi. Molestiae, vel porro.',
+      'Field of Study: Business Studies | Result: GPA-3.50 (Out of 5.00)',
   },
   {
-    time: '2016 - 2018',
-    role: 'Frontend Web Developer',
-    company: 'CBA Company',
+    time: '2020',
+    role: 'Secondary School Certificate (S.S.C)',
+    company: 'Rancha Ruhitpur High School, Munshiganj',
     description:
-      'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quas, magni mollitia, aspernatur consequatur accusamus vero eum facere exercitationem velit suscipit ipsam placeat libero. Deleniti exercitationem nostrum quasi. Molestiae, vel porro.',
-  },
-  {
-    time: '2014 - 1016',
-    role: 'UI/UX Designer',
-    company: 'Example Company',
-    description:
-      'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quas, magni mollitia, aspernatur consequatur accusamus vero eum facere exercitationem velit suscipit ipsam placeat libero. Deleniti exercitationem nostrum quasi. Molestiae, vel porro.',
+      'Field of Study: Business Studies | Result: GPA-3.72 (Out of 5.00)',
   },
 ];
 

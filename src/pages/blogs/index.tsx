@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import { useEffect, useState, useCallback } from 'react';
+import { useCallback } from 'react';
 import { useRouter } from 'next/router';
 import SearchPlus from '@/Icons/SearchPlus';
 import Link2AngularRight from '@/Icons/Link2AngularRight';
@@ -31,18 +31,9 @@ function truncateText(text: string, maxLength: number): string {
 
 
 
-export default function Blog() {
+export default function Blog({ blogs }: Props) {
 
   const router = useRouter();
-  const [blogs, setBlogs] = useState<Blog[]>([])
-
-  useEffect(() => {
-    fetch('https://programmerikram.com/wp-json/wp/v2/posts').then(res => res.json()).then(data => {
-      console.log('datta', data)
-      setBlogs(data)
-    })
-
-  }, [])
 
   const handleBlogClick = useCallback(
     (e: React.MouseEvent<HTMLElement>) => {
@@ -117,19 +108,32 @@ export default function Blog() {
   );
 }
 
-
 export const getStaticProps: GetStaticProps<Props> = async () => {
-  const res = await fetch('https://programmerikram.com/wp-json/wp/v2/posts');
-  const data = await res.json();
-
-  // Optional: add validation or fallback if data is null or empty
-  if (!data || !Array.isArray(data)) {
-    return { props: { blogs: [] } };
-  }
+  // Static blog data since the external API is not working
+  const mockBlogs: Blog[] = [
+    {
+      id: 1,
+      title: { rendered: "Getting Started with WordPress Development" },
+      content: { rendered: "Learn the fundamentals of WordPress development and how to create custom themes and plugins." },
+      meta: { _blog_image: "/images/blog-wordpress.jpg" }
+    },
+    {
+      id: 2,
+      title: { rendered: "MERN Stack Best Practices" },
+      content: { rendered: "Discover the best practices for building scalable applications with MongoDB, Express, React, and Node.js." },
+      meta: { _blog_image: "/images/blog-mern.jpg" }
+    },
+    {
+      id: 3,
+      title: { rendered: "Performance Optimization Techniques" },
+      content: { rendered: "Essential techniques to optimize your web applications for better performance and user experience." },
+      meta: { _blog_image: "/images/blog-performance.jpg" }
+    }
+  ];
 
   return {
     props: {
-      blogs: data,
+      blogs: mockBlogs,
     }
   };
 };
