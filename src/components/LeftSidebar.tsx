@@ -10,7 +10,7 @@ const LeftSidebar = () => {
             {/* <h1 className='my-name mb-2'>Md Ikram</h1> */}
             <div className='left-sidebar-container'>
                 <div className='image-container my-2'>
-                    <img className='avatar-image' src='https://programmerikram.com/wp-content/uploads/2024/10/Ikramul-islam-transparent.png' alt='Programmer Ikram' />
+                    <img className='avatar-image' src='/images/profile.jpg' alt='Programmer Ikram' />
                 </div>
                 <div className='mobile-mene-toggle' onClick={() => setIsMobileMenu(!isMobileMenu)}>
                     <MenuHamburger />

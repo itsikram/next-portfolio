@@ -11,13 +11,13 @@ const PortfolioMenu = ({setIsMobileMenu}: PortfolioMenuProps) => {
         <div className='portfolio-menu-container'>
 
             <ul className='portfolio-menu'>
-                <li onClick={() => setIsMobileMenu(false)} className={`portfolio-menu-item ${pathname === '/' ? 'active' : ''}`}>
+                <li onClick={() => setIsMobileMenu(false)} className={`portfolio-menu-item ${pathname === '/resume' ? 'active' : ''}`}>
                     <Link href='/'>Home</Link>
                 </li>
                 <li onClick={() => setIsMobileMenu(false)}  className={`portfolio-menu-item ${pathname === '/about' ? 'active' : ''}`}>
                     <Link href='/about'>About</Link>
                 </li>
-                <li onClick={() => setIsMobileMenu(false)}  className={`portfolio-menu-item ${pathname === '/resume' ? 'active' : ''}`}>
+                <li onClick={() => setIsMobileMenu(false)}  className={`portfolio-menu-item ${pathname === '/' ? 'active' : ''}`}>
                     <Link href='/resume'>Resume</Link>
                 </li>
                 <li onClick={() => setIsMobileMenu(false)}  className={`portfolio-menu-item ${pathname === '/portfolio' ? 'active' : ''}`}>

@@ -2,25 +2,25 @@ import styles from '../styles/ExperienceTimeline.module.scss';
 
 const experiences = [
   {
-    time: '2018 - Present',
-    role: 'Frontend Web Developer',
-    company: 'Abc Company',
+    time: '09/2020 - Present',
+    role: 'WordPress Developer',
+    company: 'Fiverr.com',
     description:
-      'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quas, magni mollitia, aspernatur consequatur accusamus vero eum facere exercitationem velit suscipit ipsam placeat libero. Deleniti exercitationem nostrum quasi. Molestiae, vel porro.',
+      'I had 70+ five star review on my old fiver account. I worked there as wordpress developer. Because of my mistake I lost my old account now trying to rank one more account',
   },
   {
-    time: '2016 - 2018',
-    role: 'Frontend Web Developer',
-    company: 'CBA Company',
+    time: '05/2021 - 02/2022',
+    role: 'MERN Developer',
+    company: 'Freelancer.com',
     description:
-      'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quas, magni mollitia, aspernatur consequatur accusamus vero eum facere exercitationem velit suscipit ipsam placeat libero. Deleniti exercitationem nostrum quasi. Molestiae, vel porro.',
+      'I have 7 five star reviews and I worked there as a MERN Stack Application Developer',
   },
   {
-    time: '2014 - 1016',
-    role: 'UI/UX Designer',
-    company: 'Example Company',
+    time: '06/2024 - 10/2024',
+    role: 'WordPress Problem Solver',
+    company: 'BdCalling It Ltd',
     description:
-      'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quas, magni mollitia, aspernatur consequatur accusamus vero eum facere exercitationem velit suscipit ipsam placeat libero. Deleniti exercitationem nostrum quasi. Molestiae, vel porro.',
+      'BdCalling was my first office job. there have not programmer. I was the only programmer who know coding. My responsiblities was fix there elementor developer\'s issues and do Custom coding ',
   },
 ];
 
