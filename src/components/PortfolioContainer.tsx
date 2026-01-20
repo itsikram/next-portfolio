@@ -24,6 +24,7 @@ export default function PortfolioContainer({ children }: ContainerProps) {
       const pathname = usePathname();
     //   alert(pathname)
     const isHomePage = (pathname?.split('/')[1]) == 'portfolio'  || pathname == '/';
+    const isAdminRoute = pathname?.startsWith('/admin');
     const shouldShowParticles = true;
     const [isParticlesLoaded, setIsParticlesLoaded] = useState(false);
     
@@ -36,7 +37,7 @@ export default function PortfolioContainer({ children }: ContainerProps) {
         <>
             {shouldShowParticles && isParticlesLoaded && <ParticlesBackground />}
             <div className={`portfolio-page-container ${nunito.className} page-${isHomePage ? 'home' : (pathname?.split('/')[1])}`}>
-                <LeftSidebar />
+                {!isAdminRoute && <LeftSidebar />}
                 <div className='column-9 content-container'>
                     {children}
                 </div>
