@@ -1,5 +1,4 @@
 import Head from 'next/head';
-import ParticlesBackground from '@/components/ParticlesBackground';
 import SocialIcons from '@/components/SocialIcons';
 import { Github, Linkedin, Mail, Download } from 'lucide-react';
 import '../styles/home-styles.scss';
@@ -69,8 +68,6 @@ export default function Home() {
                     <SocialIcons />
                 </div>
             </section>
-            
-            <ParticlesBackground />
         </>
     );
 }
