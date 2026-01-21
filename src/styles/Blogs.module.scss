@@ -262,3 +262,58 @@
     font-size: 1rem;
   }
 }
+
+/* ===========================
+   Mini Mobile Responsive (320px and below)
+=========================== */
+
+@media (max-width: 320px) {
+  .blogsContainer {
+    gap: 0.5rem;
+    padding: 0;
+  }
+
+  .blogItem {
+    border-radius: 8px;
+  }
+
+  .blogImageContainer {
+    height: 150px;
+  }
+
+  .blogDetailsContainer {
+    padding: 0.5rem;
+  }
+
+  .blogTitle {
+    font-size: 0.9rem;
+    line-height: 1.3;
+  }
+
+  .blogDesc {
+    font-size: 0.85rem;
+    line-height: 1.5;
+  }
+
+  .blogCategory {
+    font-size: 0.7rem;
+    padding: 0.3rem 0.8rem;
+  }
+
+  .blogTag {
+    font-size: 0.65rem;
+    padding: 0.3rem 0.6rem;
+  }
+
+  .blogImageOverlay {
+    a {
+      height: 40px;
+      width: 40px;
+      
+      svg {
+        width: 16px;
+        height: 16px;
+      }
+    }
+  }
+}

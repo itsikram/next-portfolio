@@ -179,3 +179,51 @@
     }
   }
 }
+
+/* ===========================
+   Mini Mobile Responsive (320px and below)
+=========================== */
+
+@media (max-width: 320px) {
+  .contactContainer {
+    padding: 15px;
+    
+    .contactContent {
+      gap: 20px;
+    }
+    
+    .contactItem {
+      padding: 12px;
+      
+      h4 {
+        font-size: 0.9rem;
+      }
+      
+      a, p {
+        font-size: 0.8rem;
+      }
+    }
+    
+    .socialLinks {
+      padding: 15px;
+      
+      h3 {
+        font-size: 1rem;
+      }
+      
+      .socialIcons {
+        gap: 10px;
+        
+        a {
+          width: 35px;
+          height: 35px;
+          
+          svg {
+            width: 16px;
+            height: 16px;
+          }
+        }
+      }
+    }
+  }
+}

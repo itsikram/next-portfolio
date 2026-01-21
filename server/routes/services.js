@@ -34,7 +34,14 @@ router.get('/', async (req, res) => {
 // Get single service
 router.get('/:id', async (req, res) => {
   try {
-    const service = await Service.findById(req.params.id);
+    const { id } = req.params;
+    
+    // Validate if the id is a valid MongoDB ObjectId
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(400).json({ message: 'Invalid service ID format' });
+    }
+    
+    const service = await Service.findById(id);
     
     if (!service) {
       return res.status(404).json({ message: 'Service not found' });
@@ -89,6 +96,13 @@ router.post('/', authMiddleware, upload.single('image'), async (req, res) => {
 // Update service (protected)
 router.put('/:id', authMiddleware, upload.single('image'), async (req, res) => {
   try {
+    const { id } = req.params;
+    
+    // Validate if the id is a valid MongoDB ObjectId
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(400).json({ message: 'Invalid service ID format' });
+    }
+    
     const serviceData = { ...req.body };
     
     // Parse featured if it's a string
@@ -102,7 +116,7 @@ router.put('/:id', authMiddleware, upload.single('image'), async (req, res) => {
     }
 
     const service = await Service.findByIdAndUpdate(
-      req.params.id,
+      id,
       serviceData,
       { new: true, runValidators: true }
     );
@@ -156,7 +170,14 @@ router.put('/:id', authMiddleware, upload.single('image'), async (req, res) => {
 // Delete service (protected)
 router.delete('/:id', authMiddleware, async (req, res) => {
   try {
-    const service = await Service.findByIdAndDelete(req.params.id);
+    const { id } = req.params;
+    
+    // Validate if the id is a valid MongoDB ObjectId
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(400).json({ message: 'Invalid service ID format' });
+    }
+    
+    const service = await Service.findByIdAndDelete(id);
 
     if (!service) {
       return res.status(404).json({ message: 'Service not found' });

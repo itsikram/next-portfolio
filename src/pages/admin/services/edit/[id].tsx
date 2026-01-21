@@ -10,6 +10,8 @@ interface Service {
   description: string;
   icon: string;
   features: string[];
+  technologies: string[];
+  deliverables: string[];
   category: string;
   pricing: string;
   price: number;
@@ -30,6 +32,8 @@ function EditServiceContent() {
     description: '',
     icon: '',
     features: [],
+    technologies: [],
+    deliverables: [],
     category: 'web-development',
     pricing: 'project',
     price: 0,
@@ -38,6 +42,8 @@ function EditServiceContent() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [featureInput, setFeatureInput] = useState('');
+  const [technologyInput, setTechnologyInput] = useState('');
+  const [deliverableInput, setDeliverableInput] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [fetchLoading, setFetchLoading] = useState(true);
   const router = useRouter();
@@ -104,6 +110,40 @@ function EditServiceContent() {
     setService(prev => ({
       ...prev,
       features: prev.features.filter((_, i) => i !== index)
+    }));
+  };
+
+  const addTechnology = () => {
+    if (technologyInput.trim()) {
+      setService(prev => ({
+        ...prev,
+        technologies: [...prev.technologies, technologyInput.trim()]
+      }));
+      setTechnologyInput('');
+    }
+  };
+
+  const removeTechnology = (index: number) => {
+    setService(prev => ({
+      ...prev,
+      technologies: prev.technologies.filter((_, i) => i !== index)
+    }));
+  };
+
+  const addDeliverable = () => {
+    if (deliverableInput.trim()) {
+      setService(prev => ({
+        ...prev,
+        deliverables: [...prev.deliverables, deliverableInput.trim()]
+      }));
+      setDeliverableInput('');
+    }
+  };
+
+  const removeDeliverable = (index: number) => {
+    setService(prev => ({
+      ...prev,
+      deliverables: prev.deliverables.filter((_, i) => i !== index)
     }));
   };
 
@@ -328,6 +368,134 @@ function EditServiceContent() {
               {service.features.length === 0 && (
                 <p style={{ color: '#64748b', fontSize: '0.9rem', fontStyle: 'italic' }}>
                   No features added yet. Add features to highlight what's included in this service.
+                </p>
+              )}
+            </div>
+
+            <div className={styles.formGroup}>
+              <label>Service Technologies</label>
+              <div style={{ display: 'flex', gap: '0.5rem', marginBottom: '1rem' }}>
+                <input
+                  type="text"
+                  value={technologyInput}
+                  onChange={(e) => setTechnologyInput(e.target.value)}
+                  placeholder="Add a technology (e.g., React, Node.js)"
+                  onKeyPress={(e) => {
+                    if (e.key === 'Enter' && e.target === e.currentTarget) {
+                      e.preventDefault();
+                      addTechnology();
+                    }
+                  }}
+                  style={{ flex: 1 }}
+                />
+                <button 
+                  type="button" 
+                  onClick={addTechnology} 
+                  className={`${styles.button} ${styles.primaryButton}`}
+                  disabled={!technologyInput.trim()}
+                >
+                  + Add
+                </button>
+              </div>
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem' }}>
+                {service.technologies.map((technology, index) => (
+                  <span
+                    key={index}
+                    style={{
+                      background: 'linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%)',
+                      color: 'white',
+                      padding: '0.5rem 1rem',
+                      borderRadius: '20px',
+                      fontSize: '0.85rem',
+                      cursor: 'pointer',
+                      transition: 'all 0.3s ease',
+                      boxShadow: '0 2px 8px rgba(139, 92, 246, 0.2)',
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      gap: '0.5rem'
+                    }}
+                    onClick={() => removeTechnology(index)}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.transform = 'translateY(-2px)';
+                      e.currentTarget.style.boxShadow = '0 4px 12px rgba(139, 92, 246, 0.3)';
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.transform = 'translateY(0)';
+                      e.currentTarget.style.boxShadow = '0 2px 8px rgba(139, 92, 246, 0.2)';
+                    }}
+                  >
+                    {technology}
+                    <span style={{ fontSize: '1.2rem', lineHeight: 1 }}>×</span>
+                  </span>
+                ))}
+              </div>
+              {service.technologies.length === 0 && (
+                <p style={{ color: '#64748b', fontSize: '0.9rem', fontStyle: 'italic' }}>
+                  No technologies added yet. Add technologies to show the tech stack used in this service.
+                </p>
+              )}
+            </div>
+
+            <div className={styles.formGroup}>
+              <label>Service Deliverables</label>
+              <div style={{ display: 'flex', gap: '0.5rem', marginBottom: '1rem' }}>
+                <input
+                  type="text"
+                  value={deliverableInput}
+                  onChange={(e) => setDeliverableInput(e.target.value)}
+                  placeholder="Add a deliverable (e.g., Source Code, Documentation)"
+                  onKeyPress={(e) => {
+                    if (e.key === 'Enter' && e.target === e.currentTarget) {
+                      e.preventDefault();
+                      addDeliverable();
+                    }
+                  }}
+                  style={{ flex: 1 }}
+                />
+                <button 
+                  type="button" 
+                  onClick={addDeliverable} 
+                  className={`${styles.button} ${styles.primaryButton}`}
+                  disabled={!deliverableInput.trim()}
+                >
+                  + Add
+                </button>
+              </div>
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem' }}>
+                {service.deliverables.map((deliverable, index) => (
+                  <span
+                    key={index}
+                    style={{
+                      background: 'linear-gradient(135deg, #f59e0b 0%, #d97706 100%)',
+                      color: 'white',
+                      padding: '0.5rem 1rem',
+                      borderRadius: '20px',
+                      fontSize: '0.85rem',
+                      cursor: 'pointer',
+                      transition: 'all 0.3s ease',
+                      boxShadow: '0 2px 8px rgba(245, 158, 11, 0.2)',
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      gap: '0.5rem'
+                    }}
+                    onClick={() => removeDeliverable(index)}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.transform = 'translateY(-2px)';
+                      e.currentTarget.style.boxShadow = '0 4px 12px rgba(245, 158, 11, 0.3)';
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.transform = 'translateY(0)';
+                      e.currentTarget.style.boxShadow = '0 2px 8px rgba(245, 158, 11, 0.2)';
+                    }}
+                  >
+                    {deliverable}
+                    <span style={{ fontSize: '1.2rem', lineHeight: 1 }}>×</span>
+                  </span>
+                ))}
+              </div>
+              {service.deliverables.length === 0 && (
+                <p style={{ color: '#64748b', fontSize: '0.9rem', fontStyle: 'italic' }}>
+                  No deliverables added yet. Add deliverables to show what clients will receive.
                 </p>
               )}
             </div>

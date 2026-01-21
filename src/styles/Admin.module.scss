@@ -405,3 +405,92 @@
     padding: 0.5rem;
   }
 }
+
+/* ===========================
+   Mini Mobile Responsive (320px and below)
+=========================== */
+
+@media (max-width: 320px) {
+  .dashboardMain {
+    padding: 0.5rem;
+  }
+  
+  .dashboardHeader {
+    .dashboardTitle {
+      font-size: 1.5rem;
+    }
+    
+    .dashboardSubtitle {
+      font-size: 0.9rem;
+    }
+  }
+  
+  .statsGrid {
+    gap: 0.75rem;
+    
+    .statCard {
+      padding: 1rem;
+      
+      .statValue {
+        font-size: 1.5rem;
+      }
+      
+      .statLabel {
+        font-size: 0.8rem;
+      }
+    }
+  }
+  
+  .actionButtons {
+    gap: 0.5rem;
+    
+    .button {
+      padding: 0.5rem 1rem;
+      font-size: 0.8rem;
+    }
+  }
+  
+  .formSection {
+    .formTitle {
+      font-size: 1.1rem;
+    }
+    
+    .formGroup {
+      margin-bottom: 1rem;
+      
+      label {
+        font-size: 0.8rem;
+      }
+      
+      input,
+      textarea,
+      select {
+        font-size: 0.8rem;
+        padding: 0.5rem;
+      }
+    }
+  }
+  
+  .listSection {
+    .listTitle {
+      font-size: 1.1rem;
+    }
+    
+    .listTable {
+      font-size: 0.8rem;
+      
+      th,
+      td {
+        padding: 0.3rem;
+      }
+    }
+    
+    .listActions {
+      .editButton,
+      .deleteButton {
+        padding: 0.3rem 0.6rem;
+        font-size: 0.7rem;
+      }
+    }
+  }
+}

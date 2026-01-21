@@ -455,13 +455,10 @@
                     font-size: 20px;
                     color: $tc;
                     padding: 10px 0;
-                    padding-bottom: 0;
 
                     tr {
                         margin: 5px 0;
                         display: block;
-
-                        td {}
 
                         td:first-child {
                             font-weight: 800;
@@ -1914,13 +1911,10 @@
                         font-size: 20px;
                         color: $tc;
                         padding: 10px 0;
-                        padding-bottom: 0;
 
                         tr {
                             margin: 5px 0;
                             display: block;
-
-                            td {}
 
                             td:first-child {
                                 font-weight: 800;
@@ -2349,9 +2343,6 @@
                     margin-bottom: 20px;
 
 
-                    .blog-image-container {}
-
-
                     .blog-details-container {
 
                         .blog-title {
@@ -2437,6 +2428,375 @@
                             text-align: center;
 
 
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+@media only screen and (max-width: 320px) {
+    .portfolio-page-container {
+        .left-sidebar {
+            width: 85%;
+            
+            .left-sidebar-container {
+                padding: 30px 0;
+                
+                .image-container {
+                    height: 180px;
+                    width: 180px;
+                    border: 5px solid #2e344e;
+                }
+            }
+            
+            .portfolio-menu-container {
+                padding: 30px 0;
+                
+                .portfolio-menu {
+                    li {
+                        font-size: 16px;
+                        padding: 8px 6px;
+                    }
+                }
+            }
+        }
+    }
+
+    #home {
+        padding: 15px;
+        
+        .hero-content {
+            gap: 30px;
+            
+            .hero-text {
+                .home-title {
+                    font-size: 28px !important;
+                    line-height: 1.2;
+                }
+                
+                .home-subtitle {
+                    font-size: 18px !important;
+                }
+                
+                .home-desc {
+                    font-size: 14px !important;
+                }
+                
+                .hero-buttons {
+                    gap: 12px;
+                    
+                    .btn-primary, .btn-secondary {
+                        padding: 12px 20px;
+                        font-size: 14px;
+                        width: 160px;
+                    }
+                }
+            }
+            
+            .hero-image {
+                .profile-card {
+                    width: 220px;
+                    height: 220px;
+                }
+            }
+            
+            .hero-stats {
+                gap: 20px;
+                flex-wrap: wrap;
+                
+                .stat-item {
+                    h3 {
+                        font-size: 22px !important;
+                    }
+                    
+                    p {
+                        font-size: 10px !important;
+                    }
+                }
+            }
+        }
+        
+        .social-media-container {
+            a {
+                margin: 0 6px;
+                padding: 8px;
+            }
+        }
+    }
+
+    #about {
+        padding: 50px 15px;
+        
+        .about-title {
+            font-size: 28px;
+        }
+        
+        .about-info-container {
+            padding: 30px 0;
+            
+            .about-info-details {
+                .about-info-title {
+                    font-size: 28px;
+                }
+                
+                .about-info-desc {
+                    font-size: 16px;
+                }
+                
+                .about-info-table {
+                    font-size: 16px;
+                }
+                
+                .about-info-button {
+                    font-size: 18px;
+                    padding: 8px 24px;
+                }
+            }
+        }
+        
+        .about-services-container {
+            .service-link {
+                width: 100%;
+            }
+            
+            .about-service {
+                padding: 20px 15px;
+                
+                .service-icon-container {
+                    width: 50px;
+                    height: 50px;
+                    
+                    svg {
+                        width: 25px;
+                        height: 25px;
+                    }
+                }
+                
+                .service-title {
+                    font-size: 18px;
+                }
+                
+                .service-desc {
+                    font-size: 13px;
+                }
+            }
+        }
+    }
+
+    #resume {
+        padding: 30px 15px;
+        
+        .resume-title {
+            font-size: 28px;
+        }
+        
+        .section-title {
+            font-size: 22px;
+        }
+        
+        .resume-skill-container {
+            padding: 20px 0;
+            
+            .progress-bar-container {
+                width: 100%;
+                margin-bottom: 20px;
+                
+                .progress-bar-title {
+                    font-size: 18px;
+                }
+            }
+        }
+    }
+
+    #portfolio {
+        padding: 30px 15px;
+        
+        .portfolio-title {
+            font-size: 28px;
+        }
+        
+        .portfolios-container {
+            padding: 15px;
+            
+            .portfolio-item {
+                flex: 0 0 100%;
+                
+                .portfolio-details-container {
+                    padding: 15px;
+                    
+                    .portfolio-title {
+                        font-size: 18px;
+                    }
+                    
+                    .portfolio-desc {
+                        font-size: 14px;
+                    }
+                    
+                    .portfolio-tech {
+                        .tech-tag {
+                            font-size: 10px;
+                            padding: 4px 8px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    #blog {
+        padding: 30px 15px;
+        
+        .blog-title {
+            font-size: 28px;
+        }
+        
+        .blogs-container {
+            padding: 15px;
+            
+            .blog-item {
+                flex: 0 0 100%;
+                
+                .blog-details-container {
+                    padding: 15px;
+                    
+                    .blog-title {
+                        font-size: 18px;
+                    }
+                    
+                    .blog-desc {
+                        font-size: 14px;
+                    }
+                }
+            }
+        }
+    }
+
+    #services {
+        padding: 30px 15px;
+        
+        .services-title {
+            font-size: 28px;
+        }
+        
+        .services-grid {
+            grid-template-columns: 1fr;
+            gap: 15px;
+            
+            .service-card {
+                padding: 20px 15px;
+                
+                .service-header {
+                    .service-icon-container {
+                        width: 50px;
+                        height: 50px;
+                        
+                        svg {
+                            width: 25px;
+                            height: 25px;
+                        }
+                    }
+                    
+                    .service-meta {
+                        .service-title {
+                            font-size: 18px;
+                        }
+                    }
+                }
+                
+                .service-description {
+                    font-size: 14px;
+                }
+            }
+        }
+        
+        .process-container {
+            gap: 20px;
+            
+            .process-step {
+                .step-number {
+                    width: 50px;
+                    height: 50px;
+                    font-size: 16px;
+                }
+                
+                .step-content {
+                    .step-title {
+                        font-size: 16px;
+                    }
+                    
+                    .step-description {
+                        font-size: 12px;
+                    }
+                }
+            }
+        }
+        
+        .services-cta {
+            padding: 40px 20px;
+            
+            .cta-title {
+                font-size: 22px;
+            }
+            
+            .cta-description {
+                font-size: 14px;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+                gap: 12px;
+                
+                .cta-btn-primary, .cta-btn-secondary {
+                    width: 100%;
+                    padding: 12px 20px;
+                    font-size: 14px;
+                }
+            }
+        }
+    }
+
+    #contact {
+        padding: 30px 15px !important;
+        
+        .contact-title {
+            font-size: 28px;
+        }
+        
+        .section-container {
+            .contact-form-container {
+                .form-title {
+                    font-size: 24px;
+                }
+                
+                .form-group {
+                    margin-bottom: 20px;
+                    
+                    input, textarea {
+                        font-size: 16px;
+                        padding: 8px;
+                    }
+                }
+                
+                .submit-button {
+                    font-size: 16px;
+                    padding: 8px 16px;
+                }
+            }
+            
+            .contact-info-container {
+                padding: 15px;
+                
+                .info-row {
+                    padding: 15px;
+                    
+                    .data-container {
+                        label {
+                            font-size: 16px;
+                        }
+                        
+                        a {
+                            font-size: 14px;
                         }
                     }
                 }

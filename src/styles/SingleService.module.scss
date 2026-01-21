@@ -421,7 +421,9 @@
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  min-width: min-content;
+  min-width: 140px;
+  width: 140px;
+  box-sizing: border-box;
 }
 
 .primaryButton {
@@ -439,6 +441,8 @@
   background: transparent;
   color: $wc;
   border: 2px solid $wc;
+  width: 136px; /* 140px - 4px for border */
+  min-width: 136px; /* 140px - 4px for border */
 
   &:hover {
     background: $wc;
@@ -952,5 +956,150 @@
   
   .infoItem {
     font-size: clamp(0.8rem, 2.5vw, 0.9rem);
+  }
+}
+
+/* ===========================
+   Mini Mobile Responsive (320px and below)
+=========================== */
+
+@media only screen and (max-width: 320px) {
+  .singleService {
+    padding: 0.5rem;
+  }
+  
+  .serviceImageContainer {
+    height: 120px;
+    margin-bottom: 0.75rem;
+  }
+
+  .serviceTitle {
+    font-size: 1.1rem;
+  }
+
+  .serviceDescription {
+    font-size: 0.85rem;
+  }
+
+  .categoryBadge {
+    font-size: 0.7rem;
+    padding: 0.3rem 0.8rem;
+  }
+
+  .serviceInfo {
+    gap: 0.5rem;
+  }
+
+  .infoItem {
+    font-size: 0.8rem;
+  }
+
+  .featuresSection,
+  .processSection,
+  .technologiesSection,
+  .deliverablesSection,
+  .supportInfo,
+  .ctaSection,
+  .relatedServices {
+    padding: 0.75rem;
+  }
+
+  .sectionTitle {
+    font-size: 1rem;
+  }
+
+  .featuresGrid,
+  .technologiesGrid,
+  .deliverablesGrid {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+  }
+
+  .featureCard,
+  .technologyCard,
+  .deliverableCard {
+    padding: 0.75rem;
+  }
+
+  .featureTitle,
+  .technologyTitle,
+  .deliverableTitle {
+    font-size: 0.9rem;
+  }
+
+  .featureDescription,
+  .technologyDescription,
+  .deliverableDescription {
+    font-size: 0.8rem;
+  }
+
+  .processTimeline {
+    gap: 1rem;
+  }
+
+  .processStep {
+    padding: 0.75rem;
+  }
+
+  .stepNumber {
+    width: 40px;
+    height: 40px;
+    font-size: 0.9rem;
+  }
+
+  .stepTitle {
+    font-size: 0.9rem;
+  }
+
+  .stepDescription {
+    font-size: 0.75rem;
+  }
+
+  .contactFormModal {
+    padding: 0.75rem;
+  }
+
+  .formGroup {
+    margin-bottom: 1rem;
+  }
+
+  .formInput,
+  .formTextarea {
+    padding: 0.5rem;
+    font-size: 0.85rem;
+  }
+
+  .formButton {
+    padding: 0.5rem 1rem;
+    font-size: 0.85rem;
+  }
+
+  .tabButtons {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  .tabButton {
+    width: 100%;
+    justify-content: center;
+    padding: 0.5rem;
+    font-size: 0.8rem;
+  }
+
+  .relatedServicesGrid {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+  }
+
+  .relatedServiceCard {
+    padding: 0.75rem;
+  }
+
+  .relatedServiceTitle {
+    font-size: 0.9rem;
+  }
+
+  .relatedServiceDescription {
+    font-size: 0.8rem;
   }
 }

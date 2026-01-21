@@ -135,3 +135,40 @@
     }
   }
 }
+
+/* ===========================
+   Mini Mobile Responsive (320px and below)
+=========================== */
+
+@media (max-width: 320px) {
+  .skillsContainer {
+    padding: 15px;
+    
+    .skillsGrid {
+      gap: 15px;
+    }
+    
+    .skillCategory {
+      padding: 15px;
+    }
+    
+    .categoryTitle {
+      font-size: 1rem;
+      margin-bottom: 15px;
+    }
+    
+    .skillsList {
+      gap: 8px;
+    }
+    
+    .skillTag {
+      font-size: 0.7rem;
+      padding: 4px 8px;
+      border-radius: 12px;
+    }
+    
+    .skillLevel {
+      font-size: 0.6rem;
+    }
+  }
+}

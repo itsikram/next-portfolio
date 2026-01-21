@@ -55,29 +55,8 @@ export default function Services({ services, processContent }: ServicesProps) {
     return <VsCode />;
   };
 
-  // Use process content from API or fallback to hardcoded steps
-  const processSteps = processContent?.steps || [
-    {
-      step: '01',
-      title: 'Discovery & Planning',
-      description: 'Understanding your requirements and creating a detailed project plan.'
-    },
-    {
-      step: '02',
-      title: 'Design & Development',
-      description: 'Creating designs and developing the solution with regular updates.'
-    },
-    {
-      step: '03',
-      title: 'Testing & Quality Assurance',
-      description: 'Thorough testing to ensure everything works perfectly.'
-    },
-    {
-      step: '04',
-      title: 'Deployment & Support',
-      description: 'Launching the project and providing ongoing support.'
-    }
-  ];
+  // Use process content from API only
+  const processSteps = processContent?.steps || [];
 
   return (
     <>
@@ -91,9 +70,11 @@ export default function Services({ services, processContent }: ServicesProps) {
 
         <div className='services-intro'>
           <p className='services-intro-text color-tc'>
-            I offer comprehensive web development services tailored to meet your business needs. 
-            With expertise in modern technologies and best practices, I deliver high-quality solutions 
-            that drive results and exceed expectations.
+            {processContent?.subtitle || 
+              'I offer comprehensive web development services tailored to meet your business needs. ' +
+              'With expertise in modern technologies and best practices, I deliver high-quality solutions ' +
+              'that drive results and exceed expectations.'
+            }
           </p>
         </div>
 
@@ -156,25 +137,29 @@ export default function Services({ services, processContent }: ServicesProps) {
           )}
         </div>
 
-        <h2 className="services-title color-wh">
-          <span>{processContent?.title || 'Process'}</span>
-          <div className='title-border'>
-            <div className='title-border-width'></div>
-          </div>
-        </h2>
-
-        <div className='process-container'>
-          {processSteps.map((step, index) => (
-            <div key={index} className='process-step'>
-              <div className='step-number'>{step.step}</div>
-              <div className='step-content'>
-                <h3 className='step-title color-wh'>{step.title}</h3>
-                <p className='step-description color-tc'>{step.description}</p>
+        {processSteps.length > 0 ? (
+          <>
+            <h2 className="services-title color-wh">
+              <span>{processContent?.title || 'Process'}</span>
+              <div className='title-border'>
+                <div className='title-border-width'></div>
               </div>
-              {index < processSteps.length - 1 && <div className='step-connector'></div>}
+            </h2>
+
+            <div className='process-container'>
+              {processSteps.map((step, index) => (
+                <div key={index} className='process-step'>
+                  <div className='step-number'>{step.step}</div>
+                  <div className='step-content'>
+                    <h3 className='step-title color-wh'>{step.title}</h3>
+                    <p className='step-description color-tc'>{step.description}</p>
+                  </div>
+                  {index < processSteps.length - 1 && <div className='step-connector'></div>}
+                </div>
+              ))}
             </div>
-          ))}
-        </div>
+          </>
+        ) : null}
 
         <div className='services-cta'>
           <h2 className='cta-title color-wh'>Ready to Start Your Project?</h2>

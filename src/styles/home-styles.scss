@@ -1,8 +1,5 @@
 // Home Page Styles
-$pc: #037fff;
-$tc: #a4acc4;
-$border_color: #2e344e;
-$wc: #ffffff;
+@import './_variables.scss';
 
 #home {
     display: flex;

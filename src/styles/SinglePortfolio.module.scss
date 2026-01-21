@@ -285,3 +285,71 @@
         }
     }
 }
+
+/* ===========================
+   Mini Mobile Responsive (320px and below)
+=========================== */
+
+@media only screen and (max-width: 320px) {
+    .singlePortfolio {
+        padding: 20px 10px;
+
+        .portfolioHeader {
+            .portfolioTitle {
+                font-size: 24px;
+            }
+
+            .portfolioMeta {
+                .categoryBadge,
+                .featuredBadge,
+                .date {
+                    font-size: 10px;
+                    padding: 3px 8px;
+                }
+            }
+        }
+
+        .portfolioContent {
+            gap: 20px;
+
+            .portfolioDetails {
+                .portfolioDescription,
+                .portfolioTechnologies,
+                .portfolioLinks {
+                    h2 {
+                        font-size: 18px;
+                    }
+
+                    p {
+                        font-size: 13px;
+                    }
+                }
+
+                .portfolioTechnologies {
+                    .techTags {
+                        gap: 6px;
+                        
+                        .techTag {
+                            font-size: 10px;
+                            padding: 4px 8px;
+                        }
+                    }
+                }
+
+                .portfolioLinks {
+                    .linkButtons {
+                        flex-direction: column;
+                        gap: 10px;
+                        
+                        .linkButton {
+                            padding: 8px 16px;
+                            font-size: 12px;
+                            width: 100%;
+                            justify-content: center;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

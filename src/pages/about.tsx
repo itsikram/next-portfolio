@@ -72,6 +72,15 @@ export default function About({ aboutContent, services, generalDetails }: AboutP
     }
   };
 
+  // Return early if no about content is available
+  if (!aboutContent) {
+    return (
+      <section id='about'>
+        <div className='error-state'>About content not available</div>
+      </section>
+    );
+  }
+
   return (
     <>
       <section id='about'>
@@ -232,30 +241,7 @@ export const getServerSideProps: GetServerSideProps<AboutProps> = async () => {
 
     return {
       props: {
-        aboutContent: aboutResponse.data || {
-          personalInfo: {
-            fullName: "Md Ikram",
-            dateOfBirth: "16/07/2003",
-            age: "22 Years",
-            nationality: "Bangladeshi",
-            experience: "5+ Years",
-            languages: "English, Bengali",
-            address: "Biler Kani, Munshiganj, Bangladesh",
-            mobile: "+8801581400711",
-            email: "mdikram295@gmail.com",
-            freelance: "Available",
-            profileImage: "/images/profile.jpg",
-            description: "Full Stack WordPress & MERN Developer with 5+ years of experience."
-          },
-          reviews: [
-            {
-              text: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem tenetur ratione quod.',
-              author: 'Baish',
-              source: 'Freelancer.com'
-            }
-          ],
-          cvDownloadUrl: "/Senior Software Developer.pdf"
-        },
+        aboutContent: aboutResponse.data || null,
         services: servicesResponse.data?.services || [],
         generalDetails: generalResponse.data || { cvDownloadUrl: "/Senior Software Developer.pdf" }
       }
@@ -264,30 +250,7 @@ export const getServerSideProps: GetServerSideProps<AboutProps> = async () => {
     console.error('Error fetching about page data:', error);
     return {
       props: {
-        aboutContent: {
-          personalInfo: {
-            fullName: "Md Ikram",
-            dateOfBirth: "16/07/2003",
-            age: "22 Years",
-            nationality: "Bangladeshi",
-            experience: "5+ Years",
-            languages: "English, Bengali",
-            address: "Biler Kani, Munshiganj, Bangladesh",
-            mobile: "+8801581400711",
-            email: "mdikram295@gmail.com",
-            freelance: "Available",
-            profileImage: "/images/profile.jpg",
-            description: "Full Stack WordPress & MERN Developer with 5+ years of experience."
-          },
-          reviews: [
-            {
-              text: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
-              author: 'Baish',
-              source: 'Freelancer.com'
-            }
-          ],
-          cvDownloadUrl: "/Senior Software Developer.pdf"
-        },
+        aboutContent: null,
         services: [],
         generalDetails: { cvDownloadUrl: "/Senior Software Developer.pdf" }
       }
