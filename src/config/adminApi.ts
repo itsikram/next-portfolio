@@ -14,7 +14,7 @@ const adminApi = axios.create({
     'Content-Type': 'application/json',
   },
   // Ensure browser-only adapter is used
-  adapter: 'xhr' as 'xhr',
+  adapter: 'xhr' as const,
 });
 
 // Request interceptor to add admin token

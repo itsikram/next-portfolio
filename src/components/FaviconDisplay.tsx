@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import Image from 'next/image';
 import api from '../config/axios';
 
 interface FaviconDisplayProps {
@@ -32,10 +33,12 @@ const FaviconDisplay: React.FC<FaviconDisplayProps> = ({ className = '' }) => {
   }
 
   return (
-    <img 
+    <Image 
       src={faviconUrl} 
       alt="Site favicon" 
-      className={`w-6 h-6 object-contain ${className}`}
+      width={24}
+      height={24}
+      className={`object-contain ${className}`}
       onError={(e) => {
         // Fallback to default favicon if custom one fails to load
         const target = e.target as HTMLImageElement;

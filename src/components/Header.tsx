@@ -7,7 +7,7 @@ import axios from '@/config/axios';
 
 export default function Header() {
   const [brandName, setBrandName] = useState('Portfolio');
-  const [navigation, setNavigation] = useState([
+  const [navigation] = useState([
     { label: "Home", href: "/" },
     { label: "About", href: "/about" },
     { label: "Contact", href: "/contact" },

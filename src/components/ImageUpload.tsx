@@ -1,4 +1,5 @@
 import React, { useState, useRef } from 'react';
+import Image from 'next/image';
 import adminApi from '@/config/adminApi';
 
 interface ImageUploadProps {
@@ -17,7 +18,6 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
   onFileChange,
   label = "Upload Image",
   placeholder = "Click to upload image",
-  folder = "portfolio",
   className = ""
 }) => {
   const [uploading, setUploading] = useState(false);
@@ -75,9 +75,10 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
       if (onFileChange) {
         onFileChange(file);
       }
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error('Upload error:', error);
-      const errorMessage = error.response?.data?.message || error.message || 'Failed to upload image. Please try again.';
+      const err = error as { response?: { data?: { message?: string } }, message?: string };
+      const errorMessage = err.response?.data?.message || err.message || 'Failed to upload image. Please try again.';
       alert(errorMessage);
       // Reset preview on error
       setPreview(value || "");
@@ -117,9 +118,11 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
         
         {preview ? (
           <div className="image-preview">
-            <img 
+            <Image 
               src={preview} 
               alt="Preview" 
+              width={200}
+              height={200}
               className="preview-image"
               style={{maxWidth: '100%'}}
             />

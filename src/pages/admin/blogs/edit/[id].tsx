@@ -27,20 +27,10 @@ export default function EditBlog() {
   const [error, setError] = useState('');
   const [tagInput, setTagInput] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [isMounted, setIsMounted] = useState(false);
   const router = useRouter();
   const { id } = router.query;
 
   useEffect(() => {
-    setIsMounted(true);
-  }, []);
-
-  useEffect(() => {
-    if (!isMounted) return;
-    
-    console.log('Router query:', router.query);
-    console.log('Blog ID from query:', id);
-    
     const token = localStorage.getItem('adminToken');
     if (!token) {
       router.push('/admin/login');
@@ -50,7 +40,7 @@ export default function EditBlog() {
     if (id) {
       fetchBlog();
     }
-  }, [router, id, isMounted]);
+  }, [router, id, fetchBlog]);
 
   const fetchBlog = async () => {
     try {
@@ -58,9 +48,10 @@ export default function EditBlog() {
       const response = await adminApi.get(`/blogs/${id}`);
       console.log('API Response:', response.data);
       setBlog(response.data);
-    } catch (err: any) {
+    } catch (err: unknown) {
       console.error('Error fetching blog:', err);
-      setError(err.response?.data?.message || 'Failed to fetch blog');
+      const error = err as { response?: { data?: { message?: string } } };
+      setError(error.response?.data?.message || 'Failed to fetch blog');
     } finally {
       setFetchLoading(false);
     }
@@ -108,8 +99,9 @@ export default function EditBlog() {
       });
 
       router.push('/admin/blogs');
-    } catch (err: any) {
-      setError(err.response?.data?.message || 'Failed to update blog');
+    } catch (err: unknown) {
+      const error = err as { response?: { data?: { message?: string } } };
+      setError(error.response?.data?.message || 'Failed to update blog');
     } finally {
       setLoading(false);
       setIsSubmitting(false);

@@ -1,7 +1,6 @@
 import Brush from '@/Icons/Brush';
 import Globe from '@/Icons/Globe';
 import VsCode from '@/Icons/VsCode';
-import Code from '@/Icons/Code';
 import { Carousel } from 'react-responsive-carousel';
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import SkillsSection from '@/components/SkillsSection';
@@ -164,7 +163,7 @@ export default function About({ aboutContent, services, generalDetails }: AboutP
           </div>
         </h2>
         <div className='about-services-container color-tc'>
-          {services.map((service: Service, index: number) => (
+          {services.map((service: Service) => (
             <Link key={service._id} href={`/services/${service._id}`} className='service-link'>
               <div className='about-service'>
                 <div className='service-icon-container'>

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Image from 'next/image';
 import adminApi from '@/config/adminApi';
 
 interface FaviconUploadProps {
@@ -51,8 +52,9 @@ const FaviconUpload: React.FC<FaviconUploadProps> = ({ currentFavicon, onFavicon
         }
       });
       
-    } catch (err: any) {
-      setError(err.response?.data?.message || 'Failed to upload favicon');
+    } catch (err: unknown) {
+      const error = err as { response?: { data?: { message?: string } } };
+      setError(error.response?.data?.message || 'Failed to upload favicon');
     } finally {
       setUploading(false);
     }
@@ -67,10 +69,12 @@ const FaviconUpload: React.FC<FaviconUploadProps> = ({ currentFavicon, onFavicon
         
         {currentFavicon && (
           <div className="mb-4 flex items-center space-x-4">
-            <img 
+            <Image 
               src={currentFavicon} 
               alt="Current favicon" 
-              className="w-8 h-8 object-contain border rounded"
+              width={32}
+              height={32}
+              className="object-contain border rounded"
               onError={(e) => {
                 const target = e.target as HTMLImageElement;
                 target.style.display = 'none';

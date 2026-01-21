@@ -90,7 +90,7 @@ export default function AboutContentManager() {
     try {
       const response = await adminApi.get('/about-content');
       setContent(response.data);
-    } catch (err: any) {
+    } catch (err: unknown) {
       setError('Failed to fetch content');
     }
   };
@@ -104,8 +104,9 @@ export default function AboutContentManager() {
     try {
       await adminApi.put('/about-content', content);
       setSuccess('Content updated successfully!');
-    } catch (err: any) {
-      setError(err.response?.data?.message || 'Failed to update content');
+    } catch (err: unknown) {
+      const error = err as { response?: { data?: { message?: string } } };
+      setError(error.response?.data?.message || 'Failed to update content');
     } finally {
       setLoading(false);
     }
