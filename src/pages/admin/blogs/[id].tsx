@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useRouter } from 'next/router';
 import adminApi from '@/config/adminApi';
 import AdminLayout from '../../../components/AdminLayout';
@@ -41,6 +41,18 @@ export default function EditBlog() {
   const router = useRouter();
   const { id } = router.query;
 
+  const fetchBlog = useCallback(async () => {
+    try {
+      const response = await adminApi.get(`/blogs/${id}`);
+      setBlog(response.data.blog);
+    } catch (err: unknown) {
+      const error = err as { response?: { data?: { message?: string } } };
+      setError(error.response?.data?.message || 'Failed to fetch blog');
+    } finally {
+      setFetchLoading(false);
+    }
+  }, [id]);
+
   useEffect(() => {
     const token = localStorage.getItem('adminToken');
     if (!token) {
@@ -51,18 +63,7 @@ export default function EditBlog() {
     if (id) {
       fetchBlog();
     }
-  }, [router, id]);
-
-  const fetchBlog = async () => {
-    try {
-      const response = await adminApi.get(`/blogs/${id}`);
-      setBlog(response.data.blog);
-    } catch (err: any) {
-      setError(err.response?.data?.message || 'Failed to fetch blog');
-    } finally {
-      setFetchLoading(false);
-    }
-  };
+  }, [router, id, fetchBlog]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -108,8 +109,9 @@ export default function EditBlog() {
       });
 
       router.push('/admin/blogs');
-    } catch (err: any) {
-      setError(err.response?.data?.message || 'Failed to update blog');
+    } catch (err: unknown) {
+      const error = err as { response?: { data?: { message?: string } } };
+      setError(error.response?.data?.message || 'Failed to update blog');
     } finally {
       setLoading(false);
       setIsSubmitting(false);

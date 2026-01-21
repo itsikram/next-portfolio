@@ -25,8 +25,9 @@ export default function AdminLogin() {
       localStorage.setItem('adminToken', token);
       
       router.push('/admin/dashboard');
-    } catch (err: any) {
-      setError(err.response?.data?.message || 'Login failed');
+    } catch (err: unknown) {
+      const error = err as { response?: { data?: { message?: string } } };
+      setError(error.response?.data?.message || 'Login failed');
     } finally {
       setLoading(false);
     }

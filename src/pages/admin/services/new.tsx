@@ -56,8 +56,9 @@ export default function ServiceForm() {
       await adminApi.post('/services', service);
 
       router.push('/admin/services');
-    } catch (err: any) {
-      setError(err.response?.data?.message || 'Failed to create service');
+    } catch (err: unknown) {
+      const error = err as { response?: { data?: { message?: string } } };
+      setError(error.response?.data?.message || 'Failed to create service');
     } finally {
       setLoading(false);
       setIsSubmitting(false);

@@ -40,8 +40,9 @@ export default function BlogsManagement() {
     try {
       const response = await adminApi.get('/blogs');
       setBlogs(response.data.blogs || []);
-    } catch (err: any) {
-      setError(err.response?.data?.message || 'Failed to fetch blogs');
+    } catch (err: unknown) {
+      const error = err as { response?: { data?: { message?: string } } };
+      setError(error.response?.data?.message || 'Failed to fetch blogs');
     } finally {
       setLoading(false);
     }
@@ -56,14 +57,15 @@ export default function BlogsManagement() {
       await adminApi.delete(`/blogs/${id}`);
       
       setBlogs(blogs.filter(blog => blog._id !== id));
-    } catch (err: any) {
-      setError(err.response?.data?.message || 'Failed to delete blog');
+    } catch (err: unknown) {
+      const error = err as { response?: { data?: { message?: string } } };
+      setError(error.response?.data?.message || 'Failed to delete blog');
     }
   };
 
-  const handleEdit = (id: string) => {
-    router.push(`/admin/blogs/edit/${id}`);
-  };
+  // const handleEdit = (id: string) => {
+  //   router.push(`/admin/blogs/edit/${id}`);
+  // };
 
   if (loading) {
     return <div className={styles.loading}>Loading...</div>;

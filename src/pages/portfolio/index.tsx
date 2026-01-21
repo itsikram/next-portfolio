@@ -2,7 +2,6 @@ import React, { useCallback } from 'react';
 import SearchPlus from '@/Icons/SearchPlus';
 import Link2AngularRight from '@/Icons/Link2AngularRight';
 import { useRouter } from 'next/router';
-import PortfolioSkleton from '@/skletons/portfolio/portfolioSkleton';
 import { GetServerSideProps } from 'next';
 import Image from 'next/image';
 import serverApi from '@/config/server-api';
@@ -62,7 +61,7 @@ const Portfolio = ({ portfolios }: Props) => {
       </h1>
 
       <div className='portfolios-container'>
-        {portfolios.length > 0 ? portfolios.map((portfolio: Portfolio, key: number) => {
+        {portfolios.length > 0 ? portfolios.map((portfolio: Portfolio) => {
 
           return (
             <div key={portfolio._id} className='portfolio-item' data-id={portfolio._id} onClick={handlePortfolioClick}>

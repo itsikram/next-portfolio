@@ -37,8 +37,9 @@ export default function PortfolioManage() {
     try {
       const response = await adminApi.get('/portfolio');
       setPortfolios(response.data.portfolios || []);
-    } catch (err: any) {
-      setError(err.response?.data?.message || 'Failed to fetch portfolios');
+    } catch (err: unknown) {
+      const error = err as { response?: { data?: { message?: string } } };
+      setError(error.response?.data?.message || 'Failed to fetch portfolios');
     } finally {
       setLoading(false);
     }
@@ -53,8 +54,9 @@ export default function PortfolioManage() {
       await adminApi.delete(`/portfolio/${id}`);
       
       setPortfolios(portfolios.filter(p => p._id !== id));
-    } catch (err: any) {
-      setError(err.response?.data?.message || 'Failed to delete portfolio');
+    } catch (err: unknown) {
+      const error = err as { response?: { data?: { message?: string } } };
+      setError(error.response?.data?.message || 'Failed to delete portfolio');
     }
   };
 

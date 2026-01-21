@@ -5,7 +5,7 @@ import AdminLayout from '../../components/AdminLayout';
 import styles from '../../styles/Admin.module.css';
 
 export default function AdminDashboard() {
-  const [user, setUser] = useState(null);
+  // const [user, setUser] = useState(null);
   const [stats, setStats] = useState({
     portfolio: 0,
     services: 0,
@@ -41,10 +41,10 @@ export default function AdminDashboard() {
     fetchStats();
   }, [router]);
 
-  const handleLogout = () => {
-    localStorage.removeItem('adminToken');
-    router.push('/admin/login');
-  };
+  // const handleLogout = () => {
+  //   localStorage.removeItem('adminToken');
+  //   router.push('/admin/login');
+  // };
 
   return (
     <AdminLayout>

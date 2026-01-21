@@ -54,7 +54,7 @@ export default function ContactManager() {
     try {
       const response = await adminApi.get('/contact');
       setContent(response.data);
-    } catch (err: any) {
+    } catch (err: unknown) {
       setError('Failed to fetch contact content');
     }
   };
@@ -68,8 +68,9 @@ export default function ContactManager() {
     try {
       await adminApi.put('/contact', content);
       setSuccess('Contact information updated successfully!');
-    } catch (err: any) {
-      setError(err.response?.data?.message || 'Failed to update contact information');
+    } catch (err: unknown) {
+      const error = err as { response?: { data?: { message?: string } } };
+      setError(error.response?.data?.message || 'Failed to update contact information');
     } finally {
       setLoading(false);
     }

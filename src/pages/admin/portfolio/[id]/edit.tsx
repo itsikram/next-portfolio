@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useRouter } from 'next/router';
 import adminApi from '@/config/adminApi';
 import AdminLayout from '../../../../components/AdminLayout';
@@ -37,6 +37,18 @@ export default function EditPortfolio() {
   const router = useRouter();
   const { id } = router.query;
 
+  const fetchPortfolio = useCallback(async () => {
+    try {
+      const response = await adminApi.get(`/portfolio/${id}`);
+      setPortfolio(response.data);
+    } catch (err: unknown) {
+      const error = err as { response?: { data?: { message?: string } } };
+      setError(error.response?.data?.message || 'Failed to fetch portfolio');
+    } finally {
+      setFetchLoading(false);
+    }
+  }, [id]);
+
   useEffect(() => {
     const token = localStorage.getItem('adminToken');
     if (!token) {
@@ -47,18 +59,7 @@ export default function EditPortfolio() {
     if (id) {
       fetchPortfolio();
     }
-  }, [router, id]);
-
-  const fetchPortfolio = async () => {
-    try {
-      const response = await adminApi.get(`/portfolio/${id}`);
-      setPortfolio(response.data);
-    } catch (err: any) {
-      setError(err.response?.data?.message || 'Failed to fetch portfolio');
-    } finally {
-      setFetchLoading(false);
-    }
-  };
+  }, [router, id, fetchPortfolio]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -67,7 +68,7 @@ export default function EditPortfolio() {
     setError('');
 
     try {
-      const token = localStorage.getItem('adminToken');
+      // const token = localStorage.getItem('adminToken');
       
       // Create FormData for file upload
       const formData = new FormData();
@@ -98,8 +99,9 @@ export default function EditPortfolio() {
       });
 
       router.push('/admin/portfolio');
-    } catch (err: any) {
-      setError(err.response?.data?.message || 'Failed to update portfolio');
+    } catch (err: unknown) {
+      const error = err as { response?: { data?: { message?: string } } };
+      setError(error.response?.data?.message || 'Failed to update portfolio');
     } finally {
       setLoading(false);
       setIsSubmitting(false);

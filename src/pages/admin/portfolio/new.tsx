@@ -49,7 +49,7 @@ export default function PortfolioForm() {
     setError('');
 
     try {
-      const token = localStorage.getItem('adminToken');
+  // const token = localStorage.getItem('adminToken');
       
       // Create FormData for file upload
       const formData = new FormData();
@@ -80,8 +80,9 @@ export default function PortfolioForm() {
       });
 
       router.push('/admin/portfolio');
-    } catch (err: any) {
-      setError(err.response?.data?.message || 'Failed to create portfolio');
+    } catch (err: unknown) {
+      const error = err as { response?: { data?: { message?: string } } };
+      setError(error.response?.data?.message || 'Failed to create portfolio');
     } finally {
       setLoading(false);
       setIsSubmitting(false);

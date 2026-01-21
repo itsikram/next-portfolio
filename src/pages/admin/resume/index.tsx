@@ -58,7 +58,7 @@ export default function ResumeContentManager() {
     try {
       const response = await adminApi.get('/resume-content');
       setContent(response.data);
-    } catch (err: any) {
+    } catch (err: unknown) {
       setError('Failed to fetch content');
     }
   };
@@ -72,8 +72,9 @@ export default function ResumeContentManager() {
     try {
       await adminApi.put('/resume-content', content);
       setSuccess('Content updated successfully!');
-    } catch (err: any) {
-      setError(err.response?.data?.message || 'Failed to update content');
+    } catch (err: unknown) {
+      const error = err as { response?: { data?: { message?: string } } };
+      setError(error.response?.data?.message || 'Failed to update content');
     } finally {
       setLoading(false);
     }
@@ -86,7 +87,7 @@ export default function ResumeContentManager() {
     }));
   };
 
-  const updateSkill = (index: number, field: keyof Skill, value: any) => {
+  const updateSkill = (index: number, field: keyof Skill, value: string | number) => {
     setContent(prev => ({
       ...prev,
       skills: prev.skills.map((skill, i) => 
@@ -117,7 +118,7 @@ export default function ResumeContentManager() {
     }));
   };
 
-  const updateExperience = (index: number, field: keyof Experience, value: any) => {
+  const updateExperience = (index: number, field: keyof Experience, value: string | boolean) => {
     setContent(prev => ({
       ...prev,
       experience: prev.experience.map((exp, i) => 

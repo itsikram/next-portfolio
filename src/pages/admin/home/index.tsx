@@ -65,7 +65,7 @@ export default function HomeContentManager() {
     try {
       const response = await adminApi.get('/home-content');
       setContent(response.data);
-    } catch (err: any) {
+    } catch (err: unknown) {
       setError('Failed to fetch content');
     }
   };
@@ -79,8 +79,9 @@ export default function HomeContentManager() {
     try {
       await adminApi.put('home-content', content);
       setSuccess('Content updated successfully!');
-    } catch (err: any) {
-      setError(err.response?.data?.message || 'Failed to update content');
+    } catch (err: unknown) {
+      const error = err as { response?: { data?: { message?: string } } };
+      setError(error.response?.data?.message || 'Failed to update content');
     } finally {
       setLoading(false);
     }
@@ -139,7 +140,7 @@ export default function HomeContentManager() {
     }));
   };
 
-  const updateCtaButton = (index: number, field: keyof CtaButton, value: any) => {
+  const updateCtaButton = (index: number, field: keyof CtaButton, value: string | boolean) => {
     setContent(prev => ({
       ...prev,
       ctaButtons: prev.ctaButtons.map((button, i) => 

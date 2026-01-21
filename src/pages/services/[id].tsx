@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
 import Link from 'next/link';
-import { ArrowLeft, Clock, DollarSign, CheckCircle, Star, Send, Calendar, Users, Award, TrendingUp, Shield, Zap } from 'lucide-react';
+import { ArrowLeft, Clock, DollarSign, CheckCircle, Send, Calendar, Users, Award, TrendingUp, Shield, Zap } from 'lucide-react';
 import { GetServerSideProps } from 'next';
 import serverApi from '@/config/server-api';
 import styles from '@/styles/SingleService.module.scss';
@@ -54,7 +54,7 @@ export default function SingleService({ service, relatedServices }: ServiceProps
   const [formSubmitting, setFormSubmitting] = useState(false);
   const [formMessage, setFormMessage] = useState('');
   const [activeTab, setActiveTab] = useState('features');
-  const router = useRouter();
+  // const router = useRouter();
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
@@ -290,7 +290,7 @@ export default function SingleService({ service, relatedServices }: ServiceProps
                       <div className={styles.stepNumber}>2</div>
                       <div className={styles.stepContent}>
                         <h3>Design & Development</h3>
-                        <p>I create the solution with regular updates and feedback sessions to ensure we're on the right track.</p>
+                        <p>I create the solution with regular updates and feedback sessions to ensure we&apos;re on the right track.</p>
                       </div>
                     </div>
                     <div className={styles.processStep}>

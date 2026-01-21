@@ -97,8 +97,9 @@ export default function BlogForm() {
       });
 
       router.push('/admin/blogs');
-    } catch (err: any) {
-      setError(err.response?.data?.message || 'Failed to create blog');
+    } catch (err: unknown) {
+      const error = err as { response?: { data?: { message?: string } } };
+      setError(error.response?.data?.message || 'Failed to create blog');
     } finally {
       setLoading(false);
       setIsSubmitting(false);

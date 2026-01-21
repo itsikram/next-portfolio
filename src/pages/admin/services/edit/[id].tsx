@@ -69,9 +69,10 @@ function EditServiceContent() {
     try {
       const response = await adminApi.get(`/services/${serviceId}`);
       setService(response.data);
-    } catch (err: any) {
+    } catch (err: unknown) {
       console.error('Error fetching service:', err);
-      setError(err.response?.data?.message || 'Failed to fetch service');
+      const error = err as { response?: { data?: { message?: string } } };
+      setError(error.response?.data?.message || 'Failed to fetch service');
       // Don't automatically redirect, let user see the error
     } finally {
       setFetchLoading(false);
@@ -88,8 +89,9 @@ function EditServiceContent() {
       await adminApi.put(`/services/${id}`, service);
 
       router.push('/admin/services');
-    } catch (err: any) {
-      setError(err.response?.data?.message || 'Failed to update service');
+    } catch (err: unknown) {
+      const error = err as { response?: { data?: { message?: string } } };
+      setError(error.response?.data?.message || 'Failed to update service');
     } finally {
       setLoading(false);
       setIsSubmitting(false);

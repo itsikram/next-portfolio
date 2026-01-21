@@ -27,8 +27,6 @@ interface BlogPostProps {
 }
 
 export default function BlogPost({ blog }: BlogPostProps) {
-  const router = useRouter();
-
   const formatDate = (dateString: string) => {
     return new Date(dateString).toLocaleDateString('en-US', {
       year: 'numeric',
@@ -163,7 +161,7 @@ export const getServerSideProps: GetServerSideProps<BlogPostProps> = async ({ pa
         _id: '1',
         title: "Getting Started with WordPress Development",
         coverImage: '/images/default-blog.jpg',
-        content: `<h2>Introduction to WordPress Development</h2><p>WordPress development is a valuable skill in today's web development landscape.</p>`,
+        content: `<h2>Introduction to WordPress Development</h2><p>WordPress development is a valuable skill in today&apos;s web development landscape.</p>`,
         slug: 'getting-started-wordpress',
         category: 'WordPress',
         tags: ['WordPress', 'PHP', 'Web Development'],

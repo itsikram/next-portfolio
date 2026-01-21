@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useRouter } from 'next/router';
 import adminApi from '@/config/adminApi';
 import AdminLayout from '../../../../components/AdminLayout';
@@ -27,22 +27,11 @@ export default function EditBlog() {
   const [error, setError] = useState('');
   const [tagInput, setTagInput] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isMounted, setIsMounted] = useState(false);
   const router = useRouter();
   const { id } = router.query;
 
-  useEffect(() => {
-    const token = localStorage.getItem('adminToken');
-    if (!token) {
-      router.push('/admin/login');
-      return;
-    }
-
-    if (id) {
-      fetchBlog();
-    }
-  }, [router, id, fetchBlog]);
-
-  const fetchBlog = async () => {
+  const fetchBlog = useCallback(async () => {
     try {
       console.log('Fetching blog with ID:', id);
       const response = await adminApi.get(`/blogs/${id}`);
@@ -55,7 +44,28 @@ export default function EditBlog() {
     } finally {
       setFetchLoading(false);
     }
-  };
+  }, [id]);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  useEffect(() => {
+    if (!isMounted) return;
+    
+    console.log('Router query:', router.query);
+    console.log('Blog ID from query:', id);
+    
+    const token = localStorage.getItem('adminToken');
+    if (!token) {
+      router.push('/admin/login');
+      return;
+    }
+
+    if (id) {
+      fetchBlog();
+    }
+  }, [router, id, isMounted, fetchBlog]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();

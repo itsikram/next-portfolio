@@ -39,8 +39,9 @@ export default function ServicesManagement() {
     try {
       const response = await adminApi.get('/services');
       setServices(response.data.services || []);
-    } catch (err: any) {
-      setError(err.response?.data?.message || 'Failed to fetch services');
+    } catch (err: unknown) {
+      const error = err as { response?: { data?: { message?: string } } };
+      setError(error.response?.data?.message || 'Failed to fetch services');
     } finally {
       setLoading(false);
     }
@@ -55,14 +56,15 @@ export default function ServicesManagement() {
       await adminApi.delete(`/services/${id}`);
       
       setServices(services.filter(service => service._id !== id));
-    } catch (err: any) {
-      setError(err.response?.data?.message || 'Failed to delete service');
+    } catch (err: unknown) {
+      const error = err as { response?: { data?: { message?: string } } };
+      setError(error.response?.data?.message || 'Failed to delete service');
     }
   };
 
-  const handleEdit = (id: string) => {
-    router.push(`/admin/services/edit/${id}`);
-  };
+  // const handleEdit = (id: string) => {
+  //   router.push(`/admin/services/edit/${id}`);
+  // };
 
   if (loading) {
     return <div className={styles.loading}>Loading...</div>;
