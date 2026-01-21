@@ -9,11 +9,11 @@ npm run build
 
 # Start backend
 echo "Starting backend..."
-pm2 start server/index.js --name "portfolio-backend" --env production
+NODE_ENV=production pm2 start server/index.js --name "portfolio-backend"
 
 # Start frontend (after build)
 echo "Starting frontend..."
-pm2 start npm --name "portfolio-frontend" -- start --env production
+NODE_ENV=production pm2 start npm --name "portfolio-frontend" -- start
 
 # Show status
 pm2 status
