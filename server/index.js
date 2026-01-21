@@ -58,10 +58,10 @@ app.use('/api/blogs', require('./routes/blogs'));
 app.use('/api/import-export', importExportRoutes);
 
 // Health check
-app.get('/health', (req, res) => {
+app.get('/', (req, res) => {
   res.json({ status: 'Server is running' });
 });
 
-app.listen(PORT, () => {
+app.listen(5000, () => {
   console.log(`Server running on port ${PORT}`);
 });
