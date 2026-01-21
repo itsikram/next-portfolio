@@ -72,28 +72,14 @@ const ImportExport: React.FC = () => {
       const text = await file.text();
       const data = JSON.parse(text);
       
-      // Check if this is frontend static data
-      if (data.projectInfo && data.navigation) {
-        // Handle frontend static data
-        const response = await adminApi.post('/import-export/import', {
-          ...data,
-          clearExisting
-        });
-        
-        setImportResult({
-          success: response.data.results.success,
-          failed: response.data.results.failed
-        });
-      } else {
-        // Handle regular database data
-        const response = await adminApi.post('/import-export/import', {
-          ...data,
-          clearExisting
-        });
-        
-        setImportResult(response.data.results);
-        fetchSummary(); // Refresh summary after import
-      }
+      // Handle regular database data
+      const response = await adminApi.post('/import-export/import', {
+        ...data,
+        clearExisting
+      });
+      
+      setImportResult(response.data.results);
+      fetchSummary(); // Refresh summary after import
     } catch (error) {
       console.error('Import failed:', error);
       setImportResult({
