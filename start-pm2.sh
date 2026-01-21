@@ -13,7 +13,7 @@ NODE_ENV=production pm2 start server/index.js --name "portfolio-backend"
 
 # Start frontend (after build)
 echo "Starting frontend..."
-NODE_ENV=production pm2 start npm --name "portfolio-frontend" -- start
+pm2 start "npm" --name "portfolio-frontend" -- start
 
 # Show status
 pm2 status
