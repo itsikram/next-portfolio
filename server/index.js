@@ -3,6 +3,7 @@ const cors = require('cors');
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 const path = require('path');
+const os = require('os');
 const authRoutes = require('./routes/auth');
 const portfolioRoutes = require('./routes/portfolio');
 const homeContentRoutes = require('./routes/homeContent');
@@ -64,13 +65,33 @@ app.get('/', (req, res) => {
 
 app.listen(PORT, '0.0.0.0', () => {
   const serverAddress = `http://localhost:${PORT}`;
-  const publicAddress = process.env.NODE_ENV === 'production' 
-    ? `http://44.221.59.187:${PORT}` 
-    : serverAddress;
+  
+  // Get actual IP addresses
+  const networkInterfaces = os.networkInterfaces();
+  const ipAddresses = [];
+  
+  Object.keys(networkInterfaces).forEach(interfaceName => {
+    const interfaces = networkInterfaces[interfaceName];
+    interfaces.forEach(iface => {
+      // Skip internal and non-IPv4 addresses
+      if (!iface.internal && iface.family === 'IPv4') {
+        ipAddresses.push(iface.address);
+      }
+    });
+  });
   
   console.log('🚀 Server started successfully!');
   console.log(`🌐 Local server address: ${serverAddress}`);
-  console.log(`🌍 Public server address: ${publicAddress}`);
   console.log(`📡 Server running on port ${PORT}`);
   console.log(`🔗 API endpoints available at: ${serverAddress}/api/`);
+  console.log(`🌍 Server is accessible on all network interfaces (0.0.0.0:${PORT})`);
+  
+  if (ipAddresses.length > 0) {
+    console.log(`📍 Actual server IP addresses:`);
+    ipAddresses.forEach(ip => {
+      console.log(`   - http://${ip}:${PORT}`);
+    });
+  } else {
+    console.log(`💡 No external IP addresses found. Check network configuration.`);
+  }
 });
