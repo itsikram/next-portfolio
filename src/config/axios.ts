@@ -20,6 +20,14 @@ const api = axios.create({
 // Request interceptor to add auth token if available
 api.interceptors.request.use(
   (config) => {
+    // Log server URL and request details
+    console.log(`🌐 Server URL: ${config.baseURL}`);
+    console.log(`📤 ${config.method?.toUpperCase()} Request: ${config.url}`);
+    console.log('📋 Request Headers:', config.headers);
+    if (config.data) {
+      console.log('📦 Request Data:', config.data);
+    }
+    
     // Only access localStorage on client side
     if (typeof window !== 'undefined') {
       const token = localStorage.getItem('token');
@@ -30,14 +38,32 @@ api.interceptors.request.use(
     return config;
   },
   (error) => {
+    console.error('❌ Request Error:', error);
     return Promise.reject(error);
   }
 );
 
 // Response interceptor for error handling
 api.interceptors.response.use(
-  (response) => response,
+  (response) => {
+    // Log successful response details
+    console.log(`✅ ${response.config.method?.toUpperCase()} Response: ${response.config.url}`);
+    console.log(`📊 Status: ${response.status} ${response.statusText}`);
+    console.log('📋 Response Headers:', response.headers);
+    if (response.data) {
+      console.log('📦 Response Data:', response.data);
+    }
+    return response;
+  },
   (error) => {
+    // Log error response details
+    console.log(`❌ ${error.config?.method?.toUpperCase()} Error: ${error.config?.url}`);
+    console.log(`📊 Status: ${error.response?.status} ${error.response?.statusText}`);
+    console.log('📋 Error Headers:', error.response?.headers);
+    if (error.response?.data) {
+      console.log('📦 Error Data:', error.response?.data);
+    }
+    
     if (error.response?.status === 401) {
       // Handle unauthorized access only on client side
       if (typeof window !== 'undefined') {

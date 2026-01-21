@@ -62,6 +62,15 @@ app.get('/', (req, res) => {
   res.json({ status: 'Server is running' });
 });
 
-app.listen(5000, () => {
-  console.log(`Server running on port ${PORT}`);
+app.listen(PORT, '0.0.0.0', () => {
+  const serverAddress = `http://localhost:${PORT}`;
+  const publicAddress = process.env.NODE_ENV === 'production' 
+    ? `http://44.221.59.187:${PORT}` 
+    : serverAddress;
+  
+  console.log('🚀 Server started successfully!');
+  console.log(`🌐 Local server address: ${serverAddress}`);
+  console.log(`🌍 Public server address: ${publicAddress}`);
+  console.log(`📡 Server running on port ${PORT}`);
+  console.log(`🔗 API endpoints available at: ${serverAddress}/api/`);
 });
