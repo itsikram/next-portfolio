@@ -18,3 +18,4 @@ pm2 start npm --name "portfolio-frontend" -- start --env production
 # Show status
 pm2 status
 pm2 save
+pm2 logs
