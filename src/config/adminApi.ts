@@ -7,8 +7,8 @@ dotenv.config();
 // Create axios instance for admin routes with browser compatibility
 const adminApi = axios.create({
   baseURL: process.env.NODE_ENV === 'production' 
-    ? process.env.NEXT_PUBLIC_API_URL || 'http://44.221.59.187:5000/api/'
-    : 'http://localhost:5000/api',
+    ? process.env.NEXT_PUBLIC_API_URL || 'http://44.221.59.187:5000'
+    : 'http://localhost:5000', // Use backend URL directly in development
   timeout: 15000,
   headers: {
     'Content-Type': 'application/json',

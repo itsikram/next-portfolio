@@ -7,8 +7,8 @@ dotenv.config();
 // Create axios instance with default configuration for browser environment
 const api = axios.create({
   baseURL: process.env.NODE_ENV === 'production' 
-    ? process.env.NEXT_PUBLIC_API_URL || 'http://44.221.59.187:5000/api/'
-    : 'http://44.221.59.187:5000/api', // Use relative URL to leverage Next.js rewrites in development
+    ? process.env.NEXT_PUBLIC_API_URL || 'http://44.221.59.187:5000/api'
+    : 'http://localhost:5000/api', // Use backend URL directly in development
   timeout: 10000,
   headers: {
     'Content-Type': 'application/json',
