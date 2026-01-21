@@ -2,31 +2,56 @@ const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
+const path = require('path');
 const authRoutes = require('./routes/auth');
 const portfolioRoutes = require('./routes/portfolio');
+const homeContentRoutes = require('./routes/homeContent');
+const aboutContentRoutes = require('./routes/aboutContent');
+const resumeContentRoutes = require('./routes/resumeContent');
+const uploadRoutes = require('./routes/upload');
+const contactRoutes = require('./routes/contact');
+const quoteRoutes = require('./routes/quote');
+const generalDetailsRoutes = require('./routes/generalDetails');
+const processContentRoutes = require('./routes/processContent');
+const importExportRoutes = require('./routes/importExport');
 
-dotenv.config();
+// Load environment variables from .env.local
+dotenv.config({ path: path.join(__dirname, '../.env') });
 
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-// Middleware
-app.use(cors());
+// Middleware - CORS configuration for all origins
+app.use(cors({
+  origin: '*',
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With'],
+  credentials: true
+}));
 app.use(express.json());
 
+// Set up file upload middleware
+const { upload } = require('./config/cloudinary');
+
 // MongoDB Connection
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/portfolio', {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-})
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/portfolio')
 .then(() => console.log('MongoDB connected'))
 .catch(err => console.log('MongoDB connection error:', err));
 
 // Routes
 app.use('/api/auth', authRoutes);
 app.use('/api/portfolio', portfolioRoutes);
+app.use('/api/home-content', homeContentRoutes);
+app.use('/api/about-content', aboutContentRoutes);
+app.use('/api/resume-content', resumeContentRoutes);
+app.use('/api/upload', uploadRoutes);
+app.use('/api/contact', contactRoutes);
+app.use('/api/quote', quoteRoutes);
+app.use('/api/general-details', generalDetailsRoutes);
+app.use('/api/process-content', processContentRoutes);
 app.use('/api/services', require('./routes/services'));
 app.use('/api/blogs', require('./routes/blogs'));
+app.use('/api/import-export', importExportRoutes);
 
 // Health check
 app.get('/health', (req, res) => {

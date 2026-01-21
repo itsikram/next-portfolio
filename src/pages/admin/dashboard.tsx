@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
-import axios from 'axios';
+import adminApi from '@/config/adminApi';
 import AdminLayout from '../../components/AdminLayout';
 import styles from '../../styles/Admin.module.css';
 
@@ -23,9 +23,9 @@ export default function AdminDashboard() {
     const fetchStats = async () => {
       try {
         const [portfolioRes, servicesRes, blogsRes] = await Promise.all([
-          axios.get('http://localhost:5000/api/portfolio'),
-          axios.get('http://localhost:5000/api/services'),
-          axios.get('http://localhost:5000/api/blogs')
+          adminApi.get('/portfolio'),
+          adminApi.get('/services'),
+          adminApi.get('/blogs')
         ]);
 
         setStats({
@@ -55,6 +55,50 @@ export default function AdminDashboard() {
 
         <main className={styles.dashboardMain}>
           <div className={styles.statsGrid}>
+            <div className={styles.statCard}>
+              <h3>Sidebar Profile Image</h3>
+              <div className={styles.statNumber}>👤</div>
+              <button 
+                onClick={() => router.push('/admin/home')}
+                className={styles.manageButton}
+              >
+                Update Image
+              </button>
+            </div>
+
+            <div className={styles.statCard}>
+              <h3>Home Content</h3>
+              <div className={styles.statNumber}>🏠</div>
+              <button 
+                onClick={() => router.push('/admin/home')}
+                className={styles.manageButton}
+              >
+                Manage
+              </button>
+            </div>
+
+            <div className={styles.statCard}>
+              <h3>About Content</h3>
+              <div className={styles.statNumber}>👤</div>
+              <button 
+                onClick={() => router.push('/admin/about')}
+                className={styles.manageButton}
+              >
+                Manage
+              </button>
+            </div>
+
+            <div className={styles.statCard}>
+              <h3>Resume Content</h3>
+              <div className={styles.statNumber}>📄</div>
+              <button 
+                onClick={() => router.push('/admin/resume')}
+                className={styles.manageButton}
+              >
+                Manage
+              </button>
+            </div>
+
             <div className={styles.statCard}>
               <h3>Portfolio Items</h3>
               <div className={styles.statNumber}>{stats.portfolio}</div>
@@ -92,6 +136,30 @@ export default function AdminDashboard() {
           <div className={styles.quickActions}>
             <h2>Quick Actions</h2>
             <div className={styles.actionButtons}>
+              <button 
+                onClick={() => router.push('/admin/home')}
+                className={styles.actionButton}
+              >
+                👤 Update Sidebar Profile Image
+              </button>
+              <button 
+                onClick={() => router.push('/admin/home')}
+                className={styles.actionButton}
+              >
+                🏠 Edit Home Content
+              </button>
+              <button 
+                onClick={() => router.push('/admin/about')}
+                className={styles.actionButton}
+              >
+                👤 Edit About Content
+              </button>
+              <button 
+                onClick={() => router.push('/admin/resume')}
+                className={styles.actionButton}
+              >
+                📄 Edit Resume Content
+              </button>
               <button 
                 onClick={() => router.push('/admin/portfolio/new')}
                 className={styles.actionButton}

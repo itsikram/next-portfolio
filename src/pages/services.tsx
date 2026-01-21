@@ -4,102 +4,59 @@ import VsCode from '@/Icons/VsCode';
 import Briefcase from '@/Icons/Briefcase';
 import GraduationCap from '@/Icons/GraduationCap';
 import ContactInfo from '@/components/ContactInfo';
+import Image from 'next/image';
+import Link from 'next/link';
+import { GetServerSideProps } from 'next';
+import serverApi from '@/config/server-api';
 
-export default function Services() {
-  const services = [
-    {
-      icon: <Brush />,
-      title: 'WordPress Development',
-      category: 'Web Development',
-      description: 'Custom WordPress themes, plugins, and full-stack solutions with performance optimization and SEO best practices.',
-      features: [
-        'Custom Theme Development',
-        'Plugin Development',
-        'E-commerce Solutions',
-        'Performance Optimization',
-        'SEO Implementation'
-      ],
-      price: 'Starting from $999',
-      timeline: '2-4 weeks'
-    },
-    {
-      icon: <VsCode />,
-      title: 'MERN Stack Development',
-      category: 'Full Stack Development',
-      description: 'Full-stack web applications using MongoDB, Express.js, React.js, and Node.js with scalable architecture.',
-      features: [
-        'React.js Frontend',
-        'Node.js Backend',
-        'MongoDB Database',
-        'RESTful APIs',
-        'Real-time Applications'
-      ],
-      price: 'Starting from $1,499',
-      timeline: '4-8 weeks'
-    },
-    {
-      icon: <Globe />,
-      title: 'Performance Optimization',
-      category: 'Optimization',
-      description: 'Website speed optimization, code optimization, and performance tuning for better user experience and search rankings.',
-      features: [
-        'Page Speed Optimization',
-        'Code Minification',
-        'Image Optimization',
-        'Caching Strategies',
-        'CDN Implementation'
-      ],
-      price: 'Starting from $499',
-      timeline: '1-2 weeks'
-    },
-    {
-      icon: <Briefcase />,
-      title: 'Custom Web Applications',
-      category: 'Enterprise Solutions',
-      description: 'Tailored web applications for businesses with advanced features and scalable architecture.',
-      features: [
-        'Business Logic Implementation',
-        'User Authentication',
-        'Database Design',
-        'API Integration',
-        'Cloud Deployment'
-      ],
-      price: 'Starting from $2,999',
-      timeline: '6-12 weeks'
-    },
-    {
-      icon: <GraduationCap />,
-      title: 'Technical Consulting',
-      category: 'Consultation',
-      description: 'Expert technical consultation for project planning, architecture design, and technology stack selection.',
-      features: [
-        'Project Planning',
-        'Architecture Design',
-        'Technology Stack Selection',
-        'Code Review',
-        'Best Practices Guidance'
-      ],
-      price: 'Starting from $299',
-      timeline: '1 week'
-    },
-    {
-      icon: <VsCode />,
-      title: 'API Development',
-      category: 'Backend Development',
-      description: 'RESTful and GraphQL API development with proper documentation and security measures.',
-      features: [
-        'RESTful APIs',
-        'GraphQL APIs',
-        'API Documentation',
-        'Authentication & Security',
-        'Rate Limiting'
-      ],
-      price: 'Starting from $799',
-      timeline: '2-3 weeks'
-    }
-  ];
+interface Service {
+  _id: string;
+  title: string;
+  category: string;
+  description: string;
+  features: string[];
+  price: string;
+  timeline: string;
+  image?: string;
+  featured: boolean;
+  createdAt: string;
+  updatedAt: string;
+}
 
-  const processSteps = [
+interface ProcessStep {
+  step: string;
+  title: string;
+  description: string;
+  order: number;
+}
+
+interface ProcessContent {
+  _id: string;
+  title: string;
+  subtitle?: string;
+  steps: ProcessStep[];
+  createdAt: string;
+  updatedAt: string;
+}
+
+interface ServicesProps {
+  services: Service[];
+  processContent: ProcessContent | null;
+}
+
+export default function Services({ services, processContent }: ServicesProps) {
+
+  const getIconForService = (title: string) => {
+    if (title.toLowerCase().includes('wordpress')) return <Brush />;
+    if (title.toLowerCase().includes('mern') || title.toLowerCase().includes('api')) return <VsCode />;
+    if (title.toLowerCase().includes('performance')) return <Globe />;
+    if (title.toLowerCase().includes('custom') || title.toLowerCase().includes('enterprise')) return <Briefcase />;
+    if (title.toLowerCase().includes('consulting')) return <GraduationCap />;
+    return <VsCode />;
+  };
+
+  // Use process content from API or fallback to hardcoded steps
+  const processSteps = processContent?.steps || [
     {
       step: '01',
       title: 'Discovery & Planning',
@@ -141,48 +98,66 @@ export default function Services() {
         </div>
 
         <div className='services-grid'>
-          {services.map((service, index) => (
-            <div key={index} className='service-card'>
-              <div className='service-header'>
-                <div className='service-icon-container'>
-                  {service.icon}
-                </div>
-                <div className='service-meta'>
-                  <span className='service-category'>{service.category}</span>
-                  <h3 className='service-title'>{service.title}</h3>
-                </div>
-              </div>
-              
-              <p className='service-description color-tc'>{service.description}</p>
-              
-              <div className='service-features'>
-                <h4 className='features-title'>Key Features:</h4>
-                <ul className='features-list'>
-                  {service.features.map((feature, idx) => (
-                    <li key={idx} className='feature-item color-tc'>{feature}</li>
-                  ))}
-                </ul>
-              </div>
-              
-              <div className='service-footer'>
-                <div className='service-info'>
-                  <div className='info-item'>
-                    <span className='info-label'>Price:</span>
-                    <span className='info-value color-pc'>{service.price}</span>
+          {services.length > 0 ? (
+            services.map((service) => (
+              <Link key={service._id} href={`/services/${service._id}`} className='service-card-link'>
+                <div className='service-card'>
+                  <div className='service-header'>
+                    <div className='service-icon-container'>
+                      {getIconForService(service.title)}
+                    </div>
+                    <div className='service-meta'>
+                      <span className='service-category'>{service.category.replace('-', ' ').replace(/\b\w/g, l => l.toUpperCase())}</span>
+                      <h3 className='service-title'>{service.title}</h3>
+                    </div>
                   </div>
-                  <div className='info-item'>
-                    <span className='info-label'>Timeline:</span>
-                    <span className='info-value color-pc'>{service.timeline}</span>
+                  
+                  {service.image && (
+                    <div className='service-image-container'>
+                      <Image 
+                        src={service.image} 
+                        alt={service.title}
+                        width={400}
+                        height={250}
+                        className='service-image'
+                      />
+                    </div>
+                  )}
+                  
+                  <p className='service-description color-tc'>{service.description}</p>
+                  
+                  <div className='service-features'>
+                    <h4 className='features-title'>Key Features:</h4>
+                    <ul className='features-list'>
+                      {service.features.slice(0, 3).map((feature, idx) => (
+                        <li key={idx} className='feature-item color-tc'>{feature}</li>
+                      ))}
+                    </ul>
+                  </div>
+                  
+                  <div className='service-footer'>
+                    <div className='service-info'>
+                      <div className='info-item'>
+                        <span className='info-label'>Price:</span>
+                        <span className='info-value color-pc'>{service.price}</span>
+                      </div>
+                      <div className='info-item'>
+                        <span className='info-label'>Timeline:</span>
+                        <span className='info-value color-pc'>{service.timeline}</span>
+                      </div>
+                    </div>
+                    <button className='service-btn'>View Details</button>
                   </div>
                 </div>
-                <button className='service-btn'>Get Quote</button>
-              </div>
-            </div>
-          ))}
+              </Link>
+            ))
+          ) : (
+            <div className='error-state'>No services available</div>
+          )}
         </div>
 
         <h2 className="services-title color-wh">
-          <span>Process</span>
+          <span>{processContent?.title || 'Process'}</span>
           <div className='title-border'>
             <div className='title-border-width'></div>
           </div>
@@ -217,3 +192,27 @@ export default function Services() {
     </>
   );
 }
+
+export const getServerSideProps: GetServerSideProps<ServicesProps> = async () => {
+  try {
+    const [servicesResponse, processResponse] = await Promise.all([
+      serverApi.get('/api/services'),
+      serverApi.get('/api/process-content')
+    ]);
+
+    return {
+      props: {
+        services: servicesResponse.data?.services || [],
+        processContent: processResponse.data || null
+      }
+    };
+  } catch (error) {
+    console.error('Error fetching services page data:', error);
+    return {
+      props: {
+        services: [],
+        processContent: null
+      }
+    };
+  }
+};

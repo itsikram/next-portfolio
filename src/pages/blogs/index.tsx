@@ -4,23 +4,30 @@ import { useRouter } from 'next/router';
 import SearchPlus from '@/Icons/SearchPlus';
 import Link2AngularRight from '@/Icons/Link2AngularRight';
 import Link from 'next/link';
-import BlogSkleton from '@/skletons/blogs/blogSkleton';
-import { GetStaticProps } from 'next';
 import Image from 'next/image';
+import { GetServerSideProps } from 'next';
+import serverApi from '@/config/server-api';
+import styles from '@/styles/Blogs.module.scss';
 
-type Blog = {
-  id: number;
-  title: { rendered: string };
-  content: { rendered: string };
-  meta?: {
-    _blog_image?: string;
-  };
-};
+interface Blog {
+  _id: string;
+  title: string;
+  content: string;
+  coverImage: string;
+  excerpt?: string;
+  slug: string;
+  category?: string;
+  tags?: string[];
+  image?: string;
+  published: boolean;
+  featured: boolean;
+  createdAt: string;
+  updatedAt: string;
+}
 
-type Props = {
+interface BlogProps {
   blogs: Blog[];
-};
-
+}
 
 function truncateText(text: string, maxLength: number): string {
   const plainText = text.replace(/<[^>]*>/g, '');
@@ -30,24 +37,18 @@ function truncateText(text: string, maxLength: number): string {
     : plainText;
 }
 
-
-
-export default function Blog({ blogs }: Props) {
-
+export default function Blog({ blogs }: BlogProps) {
   const router = useRouter();
 
   const handleBlogClick = useCallback(
     (e: React.MouseEvent<HTMLElement>) => {
       const blogId = e.currentTarget.dataset.id;
-    if (blogId) {
-      router.push(`/blogs/${blogId}`);
-    }
+      if (blogId) {
+        router.push(`/blogs/${blogId}`);
+      }
     },
-    [router] // Add any dependencies here if needed
+    [router]
   );
-
-
-
 
   return (
     <>
@@ -56,52 +57,61 @@ export default function Blog({ blogs }: Props) {
       </Head>
       <section id='blog'>
         <h1 className='blog-title'>
-
           <div className='color-wh'>Blogs</div>
           <div className='title-border'>
-
             <div className='title-border-width'></div>
           </div>
         </h1>
 
-        <div className='blogs-container'>
-
-          {blogs.length > 0 ? blogs.map((blog : Blog, key) => {
-
-            return (
-              <div className='blog-item' key={key} data-id={blog.id} onClick={handleBlogClick}>
-                <div className='blog-image-container'>
-                  <div className='blog-image-overlay'>
+        <div className={styles.blogsContainer}>
+          {blogs.length > 0 ? (
+            blogs.map((blog) => (
+              <div className={styles.blogItem} key={blog._id} data-id={blog._id} onClick={handleBlogClick}>
+                <div className={styles.blogImageContainer}>
+                  <div className={styles.blogImageOverlay}>
                     <a className='view-button'>
                       <SearchPlus />
                     </a>
-                    <Link href={`/blogs/${blog.id}`}>
-
+                    <Link href={`/blogs/${blog.slug}`}>
                       <Link2AngularRight />
-
                     </Link>
                   </div>
-                  <Image src={`${blog?.meta && blog.meta?._blog_image}`} onError={(e) => { (e.target as HTMLImageElement).style.height = '100px';}}  alt='' width={400} height={250} />
+                  <Image 
+                    src={blog?.coverImage || '/images/default-blog.jpg'} 
+                    alt={blog.title}
+                    width={400} 
+                    height={250} 
+                    onError={(e) => { 
+                      (e.target as HTMLImageElement).src = '/images/default-blog.jpg';
+                    }}
+                  />
                 </div>
-                <div className='blog-details-container'>
-                  <h3 className='blog-title' title={blog.title.rendered}>{truncateText(blog.title.rendered, 25)}</h3>
-                  <p className='blog-desc'>
-                    {truncateText(blog.content.rendered, 30)}
+                <div className={styles.blogDetailsContainer}>
+                  <h3 className={styles.blogTitle} title={blog.title}>
+                    {truncateText(blog.title, 25)}
+                  </h3>
+                  <p className={styles.blogDesc}>
+                    {truncateText(blog.excerpt || blog.content, 30)}
                   </p>
-
+                  {blog.category && (
+                    <span className={styles.blogCategory}>{blog.category}</span>
+                  )}
+                  {blog.tags && blog.tags.length > 0 && (
+                    <div className={styles.blogTags}>
+                      {blog.tags.slice(0, 3).map((tag, index) => (
+                        <span key={index} className={styles.blogTag}>{tag}</span>
+                      ))}
+                    </div>
+                  )}
                 </div>
-
               </div>
-            )
-
-          })
-            :
-
-            <BlogSkleton count={6} />
-
-          }
-
-
+            ))
+          ) : (
+            <div className={styles.noBlogs}>
+              <h3>No blogs found</h3>
+              <p>Check back later for new content.</p>
+            </div>
+          )}
         </div>
 
       </section>
@@ -109,32 +119,21 @@ export default function Blog({ blogs }: Props) {
   );
 }
 
-export const getStaticProps: GetStaticProps<Props> = async () => {
-  // Static blog data since the external API is not working
-  const mockBlogs: Blog[] = [
-    {
-      id: 1,
-      title: { rendered: "Getting Started with WordPress Development" },
-      content: { rendered: "Learn the fundamentals of WordPress development and how to create custom themes and plugins." },
-      meta: { _blog_image: "/images/blog-wordpress.jpg" }
-    },
-    {
-      id: 2,
-      title: { rendered: "MERN Stack Best Practices" },
-      content: { rendered: "Discover the best practices for building scalable applications with MongoDB, Express, React, and Node.js." },
-      meta: { _blog_image: "/images/blog-mern.jpg" }
-    },
-    {
-      id: 3,
-      title: { rendered: "Performance Optimization Techniques" },
-      content: { rendered: "Essential techniques to optimize your web applications for better performance and user experience." },
-      meta: { _blog_image: "/images/blog-performance.jpg" }
-    }
-  ];
-
-  return {
-    props: {
-      blogs: mockBlogs,
-    }
-  };
+export const getServerSideProps: GetServerSideProps<BlogProps> = async () => {
+  try {
+    const response = await serverApi.get('/api/blogs?published=true');
+    
+    return {
+      props: {
+        blogs: response.data?.blogs || []
+      }
+    };
+  } catch (error) {
+    console.error('Error fetching blogs:', error);
+    return {
+      props: {
+        blogs: []
+      }
+    };
+  }
 };

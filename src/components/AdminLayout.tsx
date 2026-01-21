@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
+import Link from 'next/link';
 import styles from '../styles/Admin.module.css';
 
 interface AdminLayoutProps {
@@ -31,10 +32,18 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
   };
 
   const menuItems = [
+    { path: '/', label: 'Visit Home', icon: '🏠' },
     { path: '/admin/dashboard', label: 'Dashboard', icon: '📊' },
+    { path: '/admin/general-details', label: 'General Details', icon: '⚙️' },
+    { path: '/admin/home', label: 'Home Content', icon: '📝' },
+    { path: '/admin/about', label: 'About Content', icon: '👤' },
+    { path: '/admin/resume', label: 'Resume Content', icon: '📄' },
     { path: '/admin/portfolio', label: 'Portfolio', icon: '💼' },
     { path: '/admin/services', label: 'Services', icon: '🛠️' },
+    { path: '/admin/process-content', label: 'Process Content', icon: '🔄' },
     { path: '/admin/blogs', label: 'Blogs', icon: '📝' },
+    { path: '/admin/contact', label: 'Contact', icon: '📧' },
+    { path: '/admin/import-export', label: 'Import/Export', icon: '💾' },
   ];
 
   if (router.pathname === '/admin/login') {
@@ -51,13 +60,13 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
         <ul className={styles.adminMenu}>
           {menuItems.map((item) => (
             <li key={item.path}>
-              <a
+              <Link
                 href={item.path}
                 className={`${styles.menuItem} ${isActive(item.path) ? styles.active : ''}`}
               >
                 <span className={styles.menuIcon}>{item.icon}</span>
                 <span className={styles.menuLabel}>{item.label}</span>
-              </a>
+              </Link>
             </li>
           ))}
         </ul>

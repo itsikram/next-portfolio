@@ -1,11 +1,11 @@
-import React, { useCallback, useState, useEffect } from 'react';
+import React, { useCallback } from 'react';
 import SearchPlus from '@/Icons/SearchPlus';
 import Link2AngularRight from '@/Icons/Link2AngularRight';
 import { useRouter } from 'next/router';
 import PortfolioSkleton from '@/skletons/portfolio/portfolioSkleton';
-import { GetStaticProps } from 'next';
+import { GetServerSideProps } from 'next';
 import Image from 'next/image';
-import axios from 'axios';
+import serverApi from '@/config/server-api';
 
 type Portfolio = {
   _id: string;
@@ -33,25 +33,6 @@ function truncateText(text: string, maxLength: number): string {
 
 const Portfolio = ({ portfolios }: Props) => {
   const router = useRouter();
-  const [loading, setLoading] = useState(true);
-  const [portfolioData, setPortfolioData] = useState<Portfolio[]>([]);
-
-  useEffect(() => {
-    const fetchPortfolios = async () => {
-      try {
-        const response = await axios.get('http://localhost:5000/api/portfolio');
-        setPortfolioData(response.data.portfolios || []);
-      } catch (error) {
-        console.error('Error fetching portfolios:', error);
-        // Fallback to mock data if API fails
-        setPortfolioData([]);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchPortfolios();
-  }, []);
 
   const handlePortfolioClick = useCallback(
     (e: React.MouseEvent<HTMLElement>) => {
@@ -66,26 +47,10 @@ const Portfolio = ({ portfolios }: Props) => {
     (e: React.MouseEvent<HTMLElement>) => {
       const id = e.currentTarget.dataset.id;
       if (!id) return;
-      router.push(`/portfolio/portfolio/${id}`)
+      router.push(`/portfolio/${id}`)
     },
     [router]
   );
-
-  if (loading) {
-    return (
-      <section id='portfolio'>
-        <h1 className='portfolio-title'>
-          <div className='color-wh'>Portfolios</div>
-          <div className='title-border'>
-            <div className='title-border-width'></div>
-          </div>
-        </h1>
-        <div className='portfolios-container'>
-          <PortfolioSkleton count={6} />
-        </div>
-      </section>
-    );
-  }
 
   return (
     <section id='portfolio'>
@@ -97,7 +62,7 @@ const Portfolio = ({ portfolios }: Props) => {
       </h1>
 
       <div className='portfolios-container'>
-        {portfolioData.length > 0 ? portfolioData.map((portfolio, key) => {
+        {portfolios.length > 0 ? portfolios.map((portfolio: Portfolio, key: number) => {
 
           return (
             <div key={portfolio._id} className='portfolio-item' data-id={portfolio._id} onClick={handlePortfolioClick}>
@@ -118,7 +83,7 @@ const Portfolio = ({ portfolios }: Props) => {
                   {truncateText(portfolio.description, 30)}
                 </p>
                 <div className='portfolio-tech'>
-                  {portfolio.technologies.slice(0, 3).map((tech, index) => (
+                  {portfolio.technologies.slice(0, 3).map((tech: string, index: number) => (
                     <span key={index} className='tech-tag'>{tech}</span>
                   ))}
                 </div>
@@ -138,5 +103,23 @@ const Portfolio = ({ portfolios }: Props) => {
     </section>
   );
 }
+
+export const getServerSideProps: GetServerSideProps<Props> = async () => {
+  try {
+    const response = await serverApi.get('/api/portfolio');
+    return {
+      props: {
+        portfolios: response.data.portfolios || []
+      }
+    };
+  } catch (error) {
+    console.error('Error fetching portfolios:', error);
+    return {
+      props: {
+        portfolios: []
+      }
+    };
+  }
+};
 
 export default Portfolio;

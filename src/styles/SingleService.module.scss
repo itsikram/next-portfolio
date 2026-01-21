@@ -1,0 +1,956 @@
+// Single Service Page Styles
+@import './_variables.scss';
+@use 'sass:color';
+
+.singleService {
+  max-width: 100%;
+  margin: 0 auto;
+  padding: clamp(1rem, 4vw, 2rem);
+  color: $wc;
+}
+
+.serviceHeader {
+  margin-bottom: 3rem;
+}
+
+.backButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: $pc;
+  text-decoration: none;
+  font-size: 0.95rem;
+  margin-bottom: 2rem;
+  transition: all 0.3s ease;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  background: rgba(139, 92, 246, 0.1);
+  border: 1px solid rgba(139, 92, 246, 0.2);
+
+  &:hover {
+    background: rgba(139, 92, 246, 0.2);
+    transform: translateX(-4px);
+  }
+}
+
+.serviceHero {
+  margin-bottom: 2rem;
+}
+
+.serviceImageContainer {
+  width: 100%;
+  height: clamp(200px, 40vw, 400px);
+  border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: clamp(1rem, 3vw, 2rem);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.serviceImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+
+  &:hover {
+    transform: scale(1.02);
+  }
+}
+
+.serviceMeta {
+  text-align: center;
+}
+
+.categoryBadge {
+  display: inline-block;
+  background: rgba(139, 92, 246, 0.2);
+  color: $wc;
+  padding: clamp(0.4rem, 1.5vw, 0.5rem) clamp(0.8rem, 2vw, 1rem);
+  border-radius: 20px;
+  font-size: clamp(0.7rem, 2vw, 0.8rem);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: clamp(0.75rem, 2vw, 1rem);
+  border: 1px solid rgba(139, 92, 246, 0.3);
+}
+
+.serviceTitle {
+  font-size: clamp(1.5rem, 5vw, 2.5rem);
+  font-weight: 700;
+  margin: 0 0 clamp(1rem, 2vw, 1.5rem) 0;
+  color: $wc;
+  line-height: 1.2;
+}
+
+.serviceDescription {
+  font-size: clamp(0.95rem, 2vw, 1.2rem);
+  line-height: 1.6;
+  color: $tc;
+  margin: 0 0 clamp(1rem, 3vw, 2rem) 0;
+  max-width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.serviceInfo {
+  display: flex;
+  justify-content: center;
+  gap: clamp(1rem, 3vw, 2rem);
+  flex-wrap: wrap;
+}
+
+.infoItem {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: $pc;
+  font-weight: 600;
+  font-size: clamp(0.9rem, 2vw, 1.1rem);
+}
+
+.serviceContent {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(2rem, 5vw, 3rem);
+}
+
+// Tabs Container
+.tabsContainer {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  padding: clamp(1rem, 3vw, 2rem);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.tabButtons {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: clamp(1rem, 3vw, 2rem);
+  flex-wrap: wrap;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding-bottom: 1rem;
+}
+
+.tabButton {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: clamp(0.5rem, 2vw, 0.75rem) clamp(1rem, 3vw, 1.5rem);
+  background: transparent;
+  border: none;
+  color: $tc;
+  cursor: pointer;
+  border-radius: 8px 8px 0 0;
+  transition: all 0.3s ease;
+  font-size: clamp(0.85rem, 2vw, 0.95rem);
+  font-weight: 500;
+  min-width: fit-content;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.05);
+    color: $wc;
+  }
+
+  svg {
+    color: $pc;
+  }
+}
+
+.activeTab {
+  background: rgba(139, 92, 246, 0.2);
+  color: $wc;
+  border-bottom: 2px solid $pc;
+}
+
+.tabContent {
+  min-height: 300px;
+}
+
+.featuresSection,
+.processSection,
+.technologiesSection,
+.deliverablesSection {
+  background: transparent;
+  padding: 0;
+  border: none;
+  border-radius: 0;
+}
+
+.sectionTitle {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: clamp(1.25rem, 3vw, 1.5rem);
+  font-weight: 600;
+  margin: 0 0 clamp(1rem, 2vw, 1.5rem) 0;
+  color: $wc;
+
+  svg {
+    color: $pc;
+  }
+}
+
+.featuresGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr));
+  gap: 1rem;
+}
+
+.featureItem {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.1);
+    transform: translateY(-2px);
+  }
+}
+
+.featureIcon {
+  color: $pc;
+  flex-shrink: 0;
+}
+
+// Technologies Grid
+.technologiesGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 150px), 1fr));
+  gap: 1rem;
+}
+
+.technologyItem {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem;
+  background: rgba(139, 92, 246, 0.1);
+  border-radius: 6px;
+  border: 1px solid rgba(139, 92, 246, 0.2);
+  transition: all 0.3s ease;
+
+  &:hover {
+    background: rgba(139, 92, 246, 0.2);
+    transform: translateY(-1px);
+  }
+
+  .techIcon {
+    width: 8px;
+    height: 8px;
+    background: $pc;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+}
+
+// Deliverables List
+.deliverablesList {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.deliverableItem {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 1rem;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.1);
+    transform: translateX(4px);
+  }
+}
+
+.deliverableNumber {
+  width: 24px;
+  height: 24px;
+  background: $pc;
+  color: $wc;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  font-weight: 600;
+  flex-shrink: 0;
+}
+
+.processSteps {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.processStep {
+  display: flex;
+  gap: 1.5rem;
+  align-items: flex-start;
+}
+
+.stepNumber {
+  width: 40px;
+  height: 40px;
+  background: $pc;
+  color: $wc;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  flex-shrink: 0;
+}
+
+.stepContent {
+  flex: 1;
+
+  h3 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin: 0 0 0.5rem 0;
+    color: $wc;
+  }
+
+  p {
+    color: $tc;
+    margin: 0;
+    line-height: 1.6;
+  }
+}
+
+// Support Info
+.supportInfo {
+  display: flex;
+  justify-content: center;
+}
+
+.supportCard {
+  background: rgba(139, 92, 246, 0.1);
+  border: 1px solid rgba(139, 92, 246, 0.3);
+  border-radius: 12px;
+  padding: clamp(1rem, 3vw, 2rem);
+  text-align: center;
+  max-width: 100%;
+  width: 100%;
+
+  .supportIcon {
+    color: $pc;
+    margin-bottom: clamp(0.75rem, 2vw, 1rem);
+  }
+
+  h3 {
+    color: $wc;
+    margin: 0 0 clamp(0.75rem, 2vw, 1rem) 0;
+    font-size: clamp(1.1rem, 3vw, 1.3rem);
+  }
+
+  p {
+    color: $tc;
+    margin: 0 0 clamp(1rem, 3vw, 1.5rem) 0;
+    line-height: 1.6;
+  }
+}
+
+.supportDetails {
+  display: flex;
+  justify-content: center;
+  gap: clamp(1rem, 3vw, 2rem);
+  flex-wrap: wrap;
+}
+
+.supportItem {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: $tc;
+  font-size: 0.9rem;
+
+  svg {
+    color: $pc;
+  }
+}
+
+.ctaSection {
+  text-align: center;
+  background: rgba(139, 92, 246, 0.1);
+  border: 1px solid rgba(139, 92, 246, 0.3);
+  border-radius: 12px;
+  padding: clamp(1.5rem, 4vw, 2rem);
+
+  h2 {
+    font-size: clamp(1.25rem, 4vw, 1.8rem);
+    margin: 0 0 clamp(0.75rem, 2vw, 1rem) 0;
+    color: $wc;
+  }
+
+  p {
+    color: $tc;
+    margin: 0 0 clamp(1.5rem, 3vw, 2rem) 0;
+    font-size: clamp(0.95rem, 2vw, 1.1rem);
+  }
+}
+
+.ctaButtons {
+  display: flex;
+  gap: clamp(0.75rem, 2vw, 1rem);
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.primaryButton,
+.secondaryButton {
+  padding: clamp(0.75rem, 2vw, 1rem) clamp(1.5rem, 4vw, 2rem);
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: clamp(0.9rem, 2vw, 1rem);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: none;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  min-width: min-content;
+}
+
+.primaryButton {
+  background: $pc;
+  color: $wc;
+
+  &:hover {
+    background: color.adjust($pc, $lightness: -10%);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(139, 92, 246, 0.3);
+  }
+}
+
+.secondaryButton {
+  background: transparent;
+  color: $wc;
+  border: 2px solid $wc;
+
+  &:hover {
+    background: $wc;
+    color: $content_bg;
+    transform: translateY(-2px);
+  }
+}
+
+// Contact Form Modal
+.contactFormOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: clamp(1rem, 3vw, 2rem);
+}
+
+.contactFormModal {
+  background: $content_bg;
+  border-radius: 12px;
+  padding: clamp(1rem, 3vw, 2rem);
+  max-width: min(100%, 600px);
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.modalHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+
+  h3 {
+    color: $wc;
+    margin: 0;
+    font-size: 1.3rem;
+  }
+}
+
+.closeButton {
+  background: none;
+  border: none;
+  color: $tc;
+  font-size: 2rem;
+  cursor: pointer;
+  padding: 0;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: $wc;
+  }
+}
+
+.contactForm {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.formRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+
+  label {
+    color: $wc;
+    font-weight: 500;
+    font-size: 0.9rem;
+  }
+
+  input,
+  textarea,
+  select {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 6px;
+    padding: 0.75rem;
+    color: $wc;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+
+    &:focus {
+      outline: none;
+      border-color: $pc;
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    &::placeholder {
+      color: $tc;
+    }
+  }
+
+  select {
+    cursor: pointer;
+
+    option {
+      background: $content_bg;
+      color: $wc;
+      padding: 0.5rem;
+
+      &:hover,
+      &:checked {
+        background: rgba(139, 92, 246, 0.2);
+        color: $wc;
+      }
+    }
+
+    &:focus option:checked,
+    &:active option:checked {
+      background: rgba(139, 92, 246, 0.3);
+      color: $wc;
+    }
+  }
+
+  textarea {
+    resize: vertical;
+    min-height: 100px;
+  }
+}
+
+.formMessage {
+  padding: 1rem;
+  background: rgba(34, 197, 94, 0.1);
+  border: 1px solid rgba(34, 197, 94, 0.3);
+  border-radius: 6px;
+  color: #22c55e;
+  text-align: center;
+}
+
+.formActions {
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-end;
+}
+
+.cancelButton,
+.submitButton {
+  padding: 0.75rem 1.5rem;
+  border-radius: 6px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: none;
+}
+
+.cancelButton {
+  background: transparent;
+  color: $tc;
+  border: 1px solid $tc;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: $wc;
+  }
+}
+
+.submitButton {
+  background: $pc;
+  color: $wc;
+
+  &:hover:not(:disabled) {
+    background: color.adjust($pc, $lightness: -10%);
+  }
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+}
+
+// Related Services
+.relatedServices {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  padding: clamp(1rem, 3vw, 2rem);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.relatedGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr));
+  gap: 1rem;
+}
+
+.relatedCard {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
+  padding: 1.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  text-decoration: none;
+  color: inherit;
+  transition: all 0.3s ease;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.1);
+    transform: translateY(-2px);
+    border-color: rgba(139, 92, 246, 0.3);
+  }
+}
+
+.relatedCardContent {
+  h4 {
+    color: $wc;
+    margin: 0 0 0.5rem 0;
+    font-size: 1.1rem;
+  }
+
+  p {
+    color: $tc;
+    margin: 0 0 1rem 0;
+    font-size: 0.9rem;
+    line-height: 1.5;
+  }
+}
+
+.relatedMeta {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.85rem;
+
+  .relatedPrice {
+    color: $pc;
+    font-weight: 600;
+  }
+
+  .relatedTimeline {
+    color: $tc;
+  }
+}
+
+// Empty State
+.emptyState {
+  padding: 2rem;
+  text-align: center;
+  background: rgba(255, 255, 255, 0.02);
+  border-radius: 8px;
+  border: 1px dashed rgba(255, 255, 255, 0.1);
+
+  p {
+    color: $tc;
+    margin: 0;
+    line-height: 1.6;
+    font-style: italic;
+  }
+}
+
+// Loading and Error States
+.loadingContainer,
+.errorContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 60vh;
+  text-align: center;
+  padding: 2rem;
+
+  .loadingSpinner {
+    width: 50px;
+    height: 50px;
+    border: 3px solid rgba(255, 255, 255, 0.1);
+    border-top: 3px solid $pc;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-bottom: 1rem;
+  }
+
+  h2 {
+    color: $wc;
+    margin-bottom: 1rem;
+    font-size: 2rem;
+  }
+
+  p {
+    color: $tc;
+    margin-bottom: 2rem;
+    font-size: 1.1rem;
+  }
+
+  .backButton {
+    margin-bottom: 0;
+  }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+// Responsive Design
+@media only screen and (max-width: 1024px) {
+  .singleService {
+    padding: clamp(0.75rem, 3vw, 1.5rem);
+  }
+  
+  .serviceImageContainer {
+    height: clamp(180px, 35vw, 350px);
+  }
+  
+  .featuresGrid,
+  .technologiesGrid,
+  .relatedGrid {
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr));
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .singleService {
+    padding: clamp(0.75rem, 4vw, 1rem);
+  }
+
+  .serviceImageContainer {
+    height: clamp(150px, 30vw, 250px);
+  }
+
+  .serviceTitle {
+    font-size: clamp(1.25rem, 6vw, 2rem);
+  }
+
+  .serviceDescription {
+    font-size: clamp(0.9rem, 2.5vw, 1rem);
+  }
+
+  .serviceInfo {
+    gap: clamp(0.75rem, 2vw, 1rem);
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .tabButtons {
+    flex-direction: row;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    gap: 0.25rem;
+    padding-bottom: 0.75rem;
+  }
+
+  .tabButton {
+    border-radius: 6px;
+    white-space: nowrap;
+    flex-shrink: 0;
+    padding: clamp(0.4rem, 2vw, 0.6rem) clamp(0.8rem, 3vw, 1.2rem);
+    font-size: clamp(0.75rem, 2.5vw, 0.85rem);
+  }
+
+  .featuresGrid,
+  .technologiesGrid,
+  .relatedGrid {
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 180px), 1fr));
+    gap: 0.75rem;
+  }
+
+  .processStep {
+    gap: clamp(0.75rem, 2vw, 1rem);
+  }
+
+  .formRow {
+    grid-template-columns: 1fr;
+  }
+
+  .formActions {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .ctaButtons {
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .primaryButton,
+  .secondaryButton {
+    width: 100%;
+    max-width: 280px;
+    padding: clamp(0.6rem, 2vw, 0.8rem) clamp(1rem, 3vw, 1.5rem);
+  }
+
+  .supportDetails {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+  
+  .stepNumber {
+    width: clamp(32px, 8vw, 40px);
+    height: clamp(32px, 8vw, 40px);
+    font-size: clamp(0.7rem, 2vw, 0.9rem);
+  }
+  
+  .stepContent h3 {
+    font-size: clamp(1rem, 3vw, 1.2rem);
+  }
+  
+  .stepContent p {
+    font-size: clamp(0.85rem, 2vw, 0.95rem);
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  .singleService {
+    padding: clamp(0.5rem, 3vw, 0.75rem);
+  }
+  
+  .serviceImageContainer {
+    height: clamp(120px, 25vw, 200px);
+    margin-bottom: clamp(0.75rem, 3vw, 1rem);
+  }
+
+  .serviceTitle {
+    font-size: clamp(1.1rem, 7vw, 1.75rem);
+  }
+
+  .serviceDescription {
+    font-size: clamp(0.85rem, 2.5vw, 0.95rem);
+  }
+
+  .featuresSection,
+  .processSection,
+  .technologiesSection,
+  .deliverablesSection,
+  .supportInfo,
+  .ctaSection,
+  .relatedServices {
+    padding: clamp(0.75rem, 3vw, 1.5rem);
+  }
+
+  .sectionTitle {
+    font-size: clamp(1rem, 4vw, 1.25rem);
+  }
+
+  .contactFormModal {
+    padding: clamp(0.75rem, 3vw, 1.5rem);
+  }
+  
+  .tabButtons {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  .tabButton {
+    width: 100%;
+    justify-content: center;
+    padding: clamp(0.5rem, 2vw, 0.6rem);
+  }
+  
+  .featuresGrid,
+  .technologiesGrid,
+  .relatedGrid {
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+  }
+  
+  .featureItem,
+  .technologyItem,
+  .relatedCard {
+    padding: clamp(0.75rem, 2vw, 1rem);
+  }
+  
+  .processStep {
+    flex-direction: column;
+    text-align: center;
+    gap: 0.75rem;
+  }
+  
+  .stepNumber {
+    margin: 0 auto;
+  }
+  
+  .ctaButtons {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  .primaryButton,
+  .secondaryButton {
+    width: 100%;
+    max-width: none;
+    padding: clamp(0.6rem, 2vw, 0.8rem);
+  }
+  
+  .backButton {
+    font-size: clamp(0.8rem, 2.5vw, 0.9rem);
+    padding: clamp(0.4rem, 2vw, 0.5rem) clamp(0.8rem, 3vw, 1rem);
+  }
+  
+  .categoryBadge {
+    font-size: clamp(0.6rem, 2.5vw, 0.7rem);
+    padding: clamp(0.3rem, 1.5vw, 0.4rem) clamp(0.6rem, 2vw, 0.8rem);
+  }
+  
+  .infoItem {
+    font-size: clamp(0.8rem, 2.5vw, 0.9rem);
+  }
+}

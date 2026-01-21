@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
-import axios from 'axios';
+import Link from 'next/link';
+import adminApi from '@/config/adminApi';
 import AdminLayout from '../../../components/AdminLayout';
 import styles from '../../../styles/Admin.module.css';
 
@@ -34,7 +35,7 @@ export default function PortfolioManage() {
 
   const fetchPortfolios = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/api/portfolio');
+      const response = await adminApi.get('/portfolio');
       setPortfolios(response.data.portfolios || []);
     } catch (err: any) {
       setError(err.response?.data?.message || 'Failed to fetch portfolios');
@@ -49,10 +50,7 @@ export default function PortfolioManage() {
     }
 
     try {
-      const token = localStorage.getItem('adminToken');
-      await axios.delete(`http://localhost:5000/api/portfolio/${id}`, {
-        headers: { Authorization: `Bearer ${token}` }
-      });
+      await adminApi.delete(`/portfolio/${id}`);
       
       setPortfolios(portfolios.filter(p => p._id !== id));
     } catch (err: any) {
@@ -69,9 +67,9 @@ export default function PortfolioManage() {
       <div className={styles.listContainer}>
         <div className={styles.listHeader}>
           <h2>Portfolio Items</h2>
-          <a href="/admin/portfolio/new" className={styles.addButton}>
+          <Link href="/admin/portfolio/new" className={styles.addButton}>
             + Add New
-          </a>
+          </Link>
         </div>
 
         {error && <div className={styles.error}>{error}</div>}
@@ -100,12 +98,12 @@ export default function PortfolioManage() {
                   <td>{portfolio.technologies.join(', ')}</td>
                   <td>{portfolio.featured ? 'Yes' : 'No'}</td>
                   <td className={styles.actionButtonsCell}>
-                    <a 
+                    <Link 
                       href={`/admin/portfolio/${portfolio._id}/edit`}
                       className={styles.editButton}
                     >
                       Edit
-                    </a>
+                    </Link>
                     <button
                       onClick={() => handleDelete(portfolio._id)}
                       className={styles.deleteButton}

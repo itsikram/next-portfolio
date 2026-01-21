@@ -1,44 +1,70 @@
 import styles from '../styles/ExperienceTimeline.module.scss';
 
-const experiences = [
+interface Experience {
+  title: string;
+  company: string;
+  location: string;
+  startDate: string;
+  endDate: string;
+  description: string;
+  isCurrentJob: boolean;
+}
+
+interface ExperienceTimelineProps {
+  experiences: Experience[];
+}
+
+const defaultExperiences: Experience[] = [
   {
-    time: 'March 2025 - Now',
-    role: 'Senior Software Developer',
+    title: 'Senior Software Developer',
     company: 'Lexidom Agency',
-    description:
-      'Leading software development projects and delivering high-performance solutions for global clients.',
+    location: 'Remote',
+    startDate: 'March 2025',
+    endDate: 'Present',
+    description: 'Leading software development projects and delivering high-performance solutions for global clients.',
+    isCurrentJob: true,
   },
   {
-    time: 'March 2024 - July 2024',
-    role: 'WordPress Problem Solver',
+    title: 'WordPress Problem Solver',
     company: 'BdCalling It Ltd.',
-    description:
-      'Provided expert WordPress solutions and custom coding support at Banasree, Rampura office.',
+    location: 'Banasree, Rampura',
+    startDate: 'March 2024',
+    endDate: 'July 2024',
+    description: 'Provided expert WordPress solutions and custom coding support at Banasree, Rampura office.',
+    isCurrentJob: false,
   },
   {
-    time: 'February 2023 - July 2024',
-    role: 'Custom WordPress Developer',
+    title: 'Custom WordPress Developer',
     company: 'Freelancer.com',
-    description:
-      'Developed custom WordPress websites and solutions for international clients with focus on performance and scalability.',
+    location: 'Remote',
+    startDate: 'February 2023',
+    endDate: 'July 2024',
+    description: 'Developed custom WordPress websites and solutions for international clients with focus on performance and scalability.',
+    isCurrentJob: false,
   },
   {
-    time: 'November 2020 - January 2025',
-    role: 'WordPress Theme Developer',
+    title: 'WordPress Theme Developer',
     company: 'Fiverr.com',
-    description:
-      'Created and customized WordPress themes, delivering high-quality solutions with excellent client satisfaction.',
+    location: 'Remote',
+    startDate: 'November 2020',
+    endDate: 'January 2025',
+    description: 'Created and customized WordPress themes, delivering high-quality solutions with excellent client satisfaction.',
+    isCurrentJob: false,
   },
 ];
 
-export default function ExperienceTimeline() {
+export default function ExperienceTimeline({ experiences = defaultExperiences }: ExperienceTimelineProps) {
+  const displayExperiences = experiences.length > 0 ? experiences : defaultExperiences;
+  
   return (
     <section className={styles.timeline}>
 
-      {experiences.map((exp, index) => (
+      {displayExperiences.map((exp, index) => (
         <div className={styles.entry} key={index}>
-          <div className={styles.time}>{exp.time}</div>
-          <div className={styles.role}>{exp.role}</div>
+          <div className={styles.time}>
+            {exp.isCurrentJob ? `${exp.startDate} - Present` : `${exp.startDate} - ${exp.endDate}`}
+          </div>
+          <div className={styles.role}>{exp.title}</div>
           <div className={styles.company}>{exp.company}</div>
           <div className={styles.description}>{exp.description}</div>
         </div>

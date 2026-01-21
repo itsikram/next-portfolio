@@ -1,0 +1,287 @@
+// Single Portfolio Page Styles
+@import './_variables.scss';
+
+.singlePortfolio {
+    padding: 50px 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    color: $wc;
+
+    .portfolioHeader {
+        margin-bottom: 40px;
+        text-align: center;
+
+        .backButton {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: transparent;
+            border: 1px solid $pc;
+            color: $pc;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+
+            &:hover {
+                background: $pc;
+                color: $wc;
+            }
+
+            svg {
+                width: 16px;
+                height: 16px;
+            }
+        }
+
+        .portfolioTitle {
+            font-size: 48px;
+            margin: 20px 0;
+            color: $wc;
+            font-weight: bold;
+        }
+
+        .portfolioMeta {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-top: 15px;
+
+            .categoryBadge,
+            .featuredBadge,
+            .date {
+                padding: 5px 15px;
+                border-radius: 20px;
+                font-size: 14px;
+                font-weight: 500;
+            }
+
+            .categoryBadge {
+                background: rgba(255, 255, 255, 0.1);
+                color: $wc;
+                border: 1px solid rgba(255, 255, 255, 0.2);
+            }
+
+            .featuredBadge {
+                background: $pc;
+                color: $wc;
+            }
+
+            .date {
+                background: rgba(255, 255, 255, 0.05);
+                color: $tc;
+            }
+        }
+    }
+
+    .portfolioContent {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 40px;
+
+        .portfolioImageSection {
+            .portfolioImageContainer {
+                border-radius: 10px;
+                overflow: hidden;
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+
+                .portfolioMainImage {
+                    width: 100%;
+                    height: auto;
+                    object-fit: cover;
+                    transition: transform 0.3s ease;
+
+                    &:hover {
+                        transform: scale(1.02);
+                    }
+                }
+            }
+        }
+
+        .portfolioDetails {
+            .portfolioDescription,
+            .portfolioTechnologies,
+            .portfolioLinks {
+                margin-bottom: 30px;
+
+                h2 {
+                    font-size: 24px;
+                    margin-bottom: 15px;
+                    color: $wc;
+                    font-weight: 600;
+                }
+
+                p {
+                    font-size: 16px;
+                    line-height: 1.6;
+                    color: $tc;
+                    margin: 0;
+                }
+            }
+
+            .portfolioTechnologies {
+                .techList {
+                    display: flex;
+                    flex-wrap: wrap;
+                    gap: 10px;
+
+                    .techTag {
+                        background: rgba(255, 255, 255, 0.1);
+                        color: $wc;
+                        padding: 8px 16px;
+                        border-radius: 20px;
+                        font-size: 14px;
+                        border: 1px solid rgba(255, 255, 255, 0.2);
+                        transition: all 0.3s ease;
+
+                        &:hover {
+                            background: rgba(255, 255, 255, 0.2);
+                            transform: translateY(-2px);
+                        }
+                    }
+                }
+            }
+
+            .portfolioLinks {
+                .linkButtons {
+                    display: flex;
+                    gap: 15px;
+                    flex-wrap: wrap;
+
+                    .linkButton {
+                        display: inline-flex;
+                        align-items: center;
+                        gap: 8px;
+                        padding: 12px 24px;
+                        border-radius: 5px;
+                        font-size: 16px;
+                        font-weight: 500;
+                        text-decoration: none;
+                        cursor: pointer;
+                        border: none;
+                        transition: all 0.3s ease;
+
+                        svg {
+                            width: 18px;
+                            height: 18px;
+                        }
+
+                        &.primary {
+                            background: $pc;
+                            color: $wc;
+
+                            &:hover {
+                                filter: brightness(0.9);
+                                transform: translateY(-2px);
+                                box-shadow: 0 5px 15px rgba(3, 127, 255, 0.3);
+                            }
+                        }
+
+                        &.secondary {
+                            background: transparent;
+                            color: $wc;
+                            border: 1px solid $wc;
+
+                            &:hover {
+                                background: $wc;
+                                color: $content_bg;
+                                transform: translateY(-2px);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    // Loading and Error States
+    .loadingContainer,
+    .errorContainer {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        min-height: 400px;
+        text-align: center;
+
+        .loadingSpinner {
+            width: 50px;
+            height: 50px;
+            border: 3px solid rgba(255, 255, 255, 0.1);
+            border-top: 3px solid $pc;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            font-size: 32px;
+            margin-bottom: 15px;
+            color: $wc;
+        }
+
+        p {
+            font-size: 18px;
+            color: $tc;
+            margin-bottom: 20px;
+        }
+    }
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+// Responsive Design for Single Portfolio
+@media only screen and (max-width: 768px) {
+    .singlePortfolio {
+        padding: 30px 15px;
+
+        .portfolioHeader {
+            .portfolioTitle {
+                font-size: 32px;
+            }
+
+            .portfolioMeta {
+                .categoryBadge,
+                .featuredBadge,
+                .date {
+                    font-size: 12px;
+                    padding: 4px 12px;
+                }
+            }
+        }
+
+        .portfolioContent {
+            gap: 30px;
+
+            .portfolioDetails {
+                .portfolioDescription,
+                .portfolioTechnologies,
+                .portfolioLinks {
+                    h2 {
+                        font-size: 20px;
+                    }
+
+                    p {
+                        font-size: 15px;
+                    }
+                }
+
+                .portfolioLinks {
+                    .linkButtons {
+                        .linkButton {
+                            padding: 10px 20px;
+                            font-size: 14px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

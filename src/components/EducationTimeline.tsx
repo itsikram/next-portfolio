@@ -1,31 +1,48 @@
 import styles from '../styles/EducationTimeline.module.scss';
 
-const educations = [
+interface Education {
+  degree: string;
+  institution: string;
+  location: string;
+  startDate: string;
+  endDate: string;
+  description: string;
+}
+
+interface EducationTimelineProps {
+  education: Education[];
+}
+
+const defaultEducation: Education[] = [
   {
-    time: '2023',
-    role: 'Higher Secondary Certificate (H.S.C)',
-    company: 'Govt. Haraganga College, Munshiganj',
-    description:
-      'Field of Study: Business Studies | Result: GPA-3.50 (Out of 5.00)',
+    degree: 'Higher Secondary Certificate (H.S.C)',
+    institution: 'Govt. Haraganga College, Munshiganj',
+    location: 'Munshiganj',
+    startDate: '2023',
+    endDate: '2023',
+    description: 'Field of Study: Business Studies | Result: GPA-3.50 (Out of 5.00)',
   },
   {
-    time: '2020',
-    role: 'Secondary School Certificate (S.S.C)',
-    company: 'Rancha Ruhitpur High School, Munshiganj',
-    description:
-      'Field of Study: Business Studies | Result: GPA-3.72 (Out of 5.00)',
+    degree: 'Secondary School Certificate (S.S.C)',
+    institution: 'Rancha Ruhitpur High School, Munshiganj',
+    location: 'Munshiganj',
+    startDate: '2020',
+    endDate: '2020',
+    description: 'Field of Study: Business Studies | Result: GPA-3.72 (Out of 5.00)',
   },
 ];
 
-export default function EducationTimeline() {
+export default function EducationTimeline({ education = defaultEducation }: EducationTimelineProps) {
+  const displayEducation = education.length > 0 ? education : defaultEducation;
+  
   return (
     <section className={styles.timeline}>
       
-      {educations.map((edu, index) => (
+      {displayEducation.map((edu, index) => (
         <div className={styles.entry} key={index}>
-          <div className={styles.time}>{edu.time}</div>
-          <div className={styles.role}>{edu.role}</div>
-          <div className={styles.company}>{edu.company}</div>
+          <div className={styles.time}>{edu.startDate}</div>
+          <div className={styles.role}>{edu.degree}</div>
+          <div className={styles.company}>{edu.institution}</div>
           <div className={styles.description}>{edu.description}</div>
         </div>
       ))}

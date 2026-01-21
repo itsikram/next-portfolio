@@ -83,6 +83,12 @@
       margin-bottom: 5px;
     }
     
+    .contactDetails {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    
     a, p {
       color: #fff;
       font-size: 1rem;

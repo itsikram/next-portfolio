@@ -1,6 +1,18 @@
 import styles from '../styles/SkillsSection.module.scss';
 
-const skills = {
+interface TechnicalSkills {
+  frontend: string[];
+  backend: string[];
+  database: string[];
+  tools: string[];
+}
+
+interface SkillsSectionProps {
+  technicalSkills?: TechnicalSkills;
+  keyStrengths?: string[];
+}
+
+const defaultSkills: TechnicalSkills = {
   frontend: [
     'React.js', 'Redux.js', 'React Native', 'HTML5', 'CSS3', 
     'Bootstrap', 'Tailwind', 'Material-UI', 'jQuery.js', 'Sass CSS'
@@ -20,7 +32,15 @@ const skills = {
   ]
 };
 
-export default function SkillsSection() {
+const defaultStrengths = [
+  'Hard Worker, Honest, Punctual and Responsible',
+  'Strong problem-solving and debugging skills',
+  'Willing to accept responsibility and perform accordingly even under pressure'
+];
+
+export default function SkillsSection({ technicalSkills = defaultSkills, keyStrengths = defaultStrengths }: SkillsSectionProps) {
+  const skills = technicalSkills;
+  const strengths = keyStrengths;
   return (
     <section className={styles.skillsContainer}>
       <h2 className="about-title color-wh">
@@ -71,9 +91,9 @@ export default function SkillsSection() {
       <div className={styles.strengthsSection}>
         <h3 className={styles.categoryTitle}>Key Strengths</h3>
         <ul className={styles.strengthsList}>
-          <li>Hard Worker, Honest, Punctual and Responsible</li>
-          <li>Strong problem-solving and debugging skills</li>
-          <li>Willing to accept responsibility and perform accordingly even under pressure</li>
+          {strengths.map((strength, index) => (
+            <li key={index}>{strength}</li>
+          ))}
         </ul>
       </div>
     </section>

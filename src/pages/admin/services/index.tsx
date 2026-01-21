@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
-import axios from 'axios';
+import Link from 'next/link';
+import adminApi from '@/config/adminApi';
 import AdminLayout from '../../../components/AdminLayout';
 import styles from '../../../styles/Admin.module.css';
 
@@ -10,6 +11,7 @@ interface Service {
   description: string;
   icon: string;
   features: string[];
+  category: string;
   pricing: string;
   price: number;
   featured: boolean;
@@ -35,10 +37,7 @@ export default function ServicesManagement() {
 
   const fetchServices = async () => {
     try {
-      const token = localStorage.getItem('adminToken');
-      const response = await axios.get('http://localhost:5000/api/services', {
-        headers: { Authorization: `Bearer ${token}` }
-      });
+      const response = await adminApi.get('/services');
       setServices(response.data.services || []);
     } catch (err: any) {
       setError(err.response?.data?.message || 'Failed to fetch services');
@@ -53,10 +52,7 @@ export default function ServicesManagement() {
     }
 
     try {
-      const token = localStorage.getItem('adminToken');
-      await axios.delete(`http://localhost:5000/api/services/${id}`, {
-        headers: { Authorization: `Bearer ${token}` }
-      });
+      await adminApi.delete(`/services/${id}`);
       
       setServices(services.filter(service => service._id !== id));
     } catch (err: any) {
@@ -69,87 +65,74 @@ export default function ServicesManagement() {
   };
 
   if (loading) {
-    return (
-      <AdminLayout>
-        <div className={styles.container}>
-          <h1>Services Management</h1>
-          <p>Loading...</p>
-        </div>
-      </AdminLayout>
-    );
+    return <div className={styles.loading}>Loading...</div>;
   }
 
   return (
     <AdminLayout>
-      <div className={styles.container}>
-        <div className={styles.header}>
-          <h1>Services Management</h1>
-          <button 
-            onClick={() => router.push('/admin/services/new')}
-            className={`${styles.button} ${styles.primaryButton}`}
-          >
-            Add New Service
-          </button>
+      <div className={styles.listContainer}>
+        <div className={styles.listHeader}>
+          <h2>Services</h2>
+          <Link href="/admin/services/new" className={styles.addButton}>
+            + Add New
+          </Link>
         </div>
 
         {error && <div className={styles.error}>{error}</div>}
 
         {services.length === 0 ? (
           <div className={styles.emptyState}>
-            <p>No services found. Create your first service!</p>
-            <button 
-              onClick={() => router.push('/admin/services/new')}
-              className={`${styles.button} ${styles.primaryButton}`}
-            >
-              Create Service
-            </button>
+            <h3>No services found</h3>
+            <p>Start by adding your first service.</p>
           </div>
         ) : (
-          <div className={styles.tableContainer}>
-            <table className={styles.table}>
-              <thead>
-                <tr>
-                  <th>Title</th>
-                  <th>Pricing</th>
-                  <th>Price</th>
-                  <th>Featured</th>
-                  <th>Created</th>
-                  <th>Actions</th>
+          <table className={styles.listTable}>
+            <thead>
+              <tr>
+                <th>Title</th>
+                <th>Category</th>
+                <th>Pricing</th>
+                <th>Price</th>
+                <th>Featured</th>
+                <th>Created</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              {services.map((service) => (
+                <tr key={service._id}>
+                  <td>{service.title}</td>
+                  <td>
+                    <span className={`${styles.badge} ${styles.categoryBadge}`}>
+                      {service.category.replace('-', ' ').replace(/\b\w/g, l => l.toUpperCase())}
+                    </span>
+                  </td>
+                  <td>{service.pricing}</td>
+                  <td>${service.price}</td>
+                  <td>
+                    <span className={`${styles.badge} ${service.featured ? styles.featured : ''}`}>
+                      {service.featured ? 'Yes' : 'No'}
+                    </span>
+                  </td>
+                  <td>{new Date(service.createdAt).toLocaleDateString()}</td>
+                  <td className={styles.actionButtonsCell}>
+                    <Link 
+                      href={`/admin/services/edit/${service._id}`}
+                      className={styles.editButton}
+                    >
+                      Edit
+                    </Link>
+                    <button
+                      onClick={() => handleDelete(service._id)}
+                      className={styles.deleteButton}
+                    >
+                      Delete
+                    </button>
+                  </td>
                 </tr>
-              </thead>
-              <tbody>
-                {services.map((service) => (
-                  <tr key={service._id}>
-                    <td>{service.title}</td>
-                    <td>{service.pricing}</td>
-                    <td>${service.price}</td>
-                    <td>
-                      <span className={`${styles.badge} ${service.featured ? styles.featured : ''}`}>
-                        {service.featured ? 'Yes' : 'No'}
-                      </span>
-                    </td>
-                    <td>{new Date(service.createdAt).toLocaleDateString()}</td>
-                    <td>
-                      <div className={styles.actions}>
-                        <button
-                          onClick={() => handleEdit(service._id)}
-                          className={`${styles.button} ${styles.secondaryButton} ${styles.small}`}
-                        >
-                          Edit
-                        </button>
-                        <button
-                          onClick={() => handleDelete(service._id)}
-                          className={`${styles.button} ${styles.dangerButton} ${styles.small}`}
-                        >
-                          Delete
-                        </button>
-                      </div>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
+              ))}
+            </tbody>
+          </table>
         )}
       </div>
     </AdminLayout>

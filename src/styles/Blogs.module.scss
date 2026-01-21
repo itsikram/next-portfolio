@@ -1,0 +1,264 @@
+@import './_variables.scss';
+
+/* ===========================
+   Blogs Grid
+=========================== */
+
+.blogsContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.75rem;
+  padding: 0;
+}
+
+/* ===========================
+   Blog Card
+=========================== */
+
+.blogItem {
+  flex: 0 0 calc(33.333% - 1rem);
+  background-color: $ls_bg;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+
+  &:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
+    border-color: rgba(139, 92, 246, 0.35);
+  }
+}
+
+/* ===========================
+   Blog Image
+=========================== */
+
+.blogImageContainer {
+  position: relative;
+  width: 100%;
+  height: 250px;
+  overflow: hidden;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+  }
+
+  &:hover img {
+    transform: scale(1.05);
+  }
+}
+
+.blogImageOverlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  background-color: rgba(25, 29, 43, 0.9);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+
+  a {
+    height: 48px;
+    width: 48px;
+    border-radius: 50%;
+    background-color: $wc;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+
+    svg {
+      width: 20px;
+      height: 20px;
+      color: $content_bg;
+    }
+
+    &:hover {
+      background-color: $pc;
+      transform: scale(1.1);
+    }
+  }
+}
+
+.blogImageContainer:hover .blogImageOverlay {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* ===========================
+   Blog Content
+=========================== */
+
+.blogDetailsContainer {
+  padding: 1.5rem;
+}
+
+.blogTitle {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: $wc;
+  margin-bottom: 0.75rem;
+  line-height: 1.4;
+  transition: color 0.3s ease;
+
+  &:hover {
+    color: $pc;
+  }
+}
+
+.blogDesc {
+  font-size: 0.95rem;
+  color: $tc;
+  line-height: 1.6;
+  margin-bottom: 1rem;
+}
+
+/* ===========================
+   Category
+=========================== */
+
+.blogCategory {
+  display: inline-block;
+  padding: 0.45rem 1rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: $wc;
+  background: rgba(139, 92, 246, 0.2);
+  border: 1px solid rgba(139, 92, 246, 0.3);
+  transition: transform 0.3s ease, background 0.3s ease;
+
+  &:hover {
+    background: rgba(139, 92, 246, 0.3);
+    transform: translateY(-2px);
+  }
+}
+
+/* ===========================
+   Tags
+=========================== */
+
+.blogTags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.blogTag {
+  padding: 0.4rem 0.8rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  border-radius: 15px;
+  color: $wc;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: transform 0.3s ease, background 0.3s ease;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
+  }
+}
+
+/* ===========================
+   Loading / Error / Empty
+=========================== */
+
+.loadingContainer,
+.errorContainer {
+  min-height: 400px;
+  padding: 2rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.loadingSpinner {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: 3px solid rgba(255, 255, 255, 0.1);
+  border-top-color: $pc;
+  animation: spin 1s linear infinite;
+  margin-bottom: 1rem;
+}
+
+.noBlogs {
+  padding: 4rem 2rem;
+  text-align: center;
+
+  h3 {
+    font-size: 2rem;
+    color: $wc;
+    margin-bottom: 1rem;
+  }
+
+  p {
+    color: $tc;
+    font-size: 1.1rem;
+  }
+}
+
+/* ===========================
+   Animations
+=========================== */
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ===========================
+   Responsive
+=========================== */
+
+@media (max-width: 1200px) {
+  .blogItem {
+    flex: 0 0 calc(50% - 1rem);
+  }
+}
+
+@media (max-width: 768px) {
+  .blogItem {
+    flex: 0 0 100%;
+  }
+
+  .blogImageContainer {
+    height: 200px;
+  }
+
+  .blogDetailsContainer {
+    padding: 1rem;
+  }
+
+  .blogTitle {
+    font-size: 1.1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .blogImageContainer {
+    height: 180px;
+  }
+
+  .blogDetailsContainer {
+    padding: 0.75rem;
+  }
+
+  .blogTitle {
+    font-size: 1rem;
+  }
+}

@@ -1,52 +1,72 @@
 import Head from 'next/head';
 import { useCallback, useState } from 'react';
-import axios from 'axios';
+import api from '@/config/axios';
 import Telephone from '@/Icons/Telephone';
 import Envelope from '@/Icons/Envelope';
 import LocationArrowRight from '@/Icons/LocationArrowRight';
+import { GetServerSideProps } from 'next';
+import serverApi from '@/config/server-api';
 
-
-
-export default function Contact() {
-  const [form, setForm] = useState({ name: '', email: '', subject: '', message: '' });
-
-  const sendEmailNotification = async (
-    email: string,
-    subject: string,
-    message: string,
-    senderName: string
-  ): Promise<void> => {
-
-    try {
-      const response = await axios.post('https://programmerikram.com/wp-json/portfolio/v1/send-mail', {
-        name: senderName,
-        email,
-        message,
-        subject: `${subject} - From Portfolio `,
-      }, {
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      });
-
-      console.log(response.data);
-    }  catch (err: unknown) {
-  if (axios.isAxiosError(err)) {
-    console.error('Error sending mail:', err.response?.data || err.message);
-  } else {
-    console.error('An unknown error occurred:', err);
-  }
+interface ContactData {
+  personalInfo: {
+    emails: string[];
+    phones: string[];
+    addresses: string[];
+  };
+  contactForm: {
+    recipientEmail: string;
+    notificationEmail: string;
+  };
 }
-  }
+
+interface ContactProps {
+  contact: ContactData | null;
+}
+
+export default function Contact({ contact }: ContactProps) {
+  const [form, setForm] = useState({ name: '', email: '', subject: '', message: '' });
+  const [submitting, setSubmitting] = useState(false);
+  const [submitMessage, setSubmitMessage] = useState('');
+  const [messageType, setMessageType] = useState<'success' | 'error'>('success');
 
   const handleFormChange = useCallback((e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   }, [form]);
 
-  const handleSubmit = useCallback((e: React.MouseEvent<HTMLButtonElement>) => {
+  const handleSubmit = useCallback(async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    sendEmailNotification('mdikram295@gmail.com', form.subject, `Message Received!\n\n${JSON.stringify(form, null, 2)}`, form.name)
-    // alert(`Message Sent!\n\n${JSON.stringify(form, null, 2)}`);
+    setSubmitting(true);
+    setSubmitMessage('');
+    
+    try {
+      // Send message through Express server
+      await api.post('/contact/send', {
+        name: form.name,
+        email: form.email,
+        subject: form.subject,
+        message: form.message
+      });
+      
+      setSubmitMessage('Message sent successfully!');
+      setMessageType('success');
+      setForm({ name: '', email: '', subject: '', message: '' });
+      
+      // Auto-hide success message after 5 seconds
+      setTimeout(() => {
+        setSubmitMessage('');
+      }, 5000);
+    } catch (error) {
+      console.error('Error sending message:', error);
+      setSubmitMessage('Failed to send message. Please try again.');
+      setMessageType('error');
+      
+      // Auto-hide error message after 8 seconds
+      setTimeout(() => {
+        setSubmitMessage('');
+      }, 8000);
+    } finally {
+      setSubmitting(false);
+    }
   }, [form]);
 
   return (
@@ -72,22 +92,30 @@ export default function Contact() {
 
             <div className='form-group'>
               <label htmlFor="yourName">Enter Your Name</label>
-              <input id='yourName' placeholder='' name='name' required={true} onChange={handleFormChange} />
+              <input id='yourName' placeholder='' name='name' required={true} onChange={handleFormChange} value={form.name} />
             </div>
             <div className='form-group'>
               <label htmlFor="yourEmail">Enter Your Email</label>
-              <input id='yourEmail' placeholder='' name='email' required={true} onChange={handleFormChange} />
+              <input id='yourEmail' placeholder='' name='email' required={true} onChange={handleFormChange} value={form.email} />
             </div>
             <div className='form-group'>
               <label htmlFor="yourSubject">Enter Your Subject</label>
-              <input id='youryourSubjectName' placeholder='' name='subject' required={true} onChange={handleFormChange} />
+              <input id='youryourSubjectName' placeholder='' name='subject' required={true} onChange={handleFormChange} value={form.subject} />
             </div>
             <div className='form-group'>
               <label htmlFor="yourMessage">Enter Your Message *</label>
-              <textarea id='yourMessage' rows={10} placeholder='' name='message' required={true} onChange={handleFormChange}> </textarea>
+              <textarea id='yourMessage' rows={10} placeholder='' name='message' required={true} onChange={handleFormChange} value={form.message} />
             </div>
 
-            <button className='submit-button' onClick={handleSubmit}>SEND MAIL</button>
+            <button className='submit-button' onClick={handleSubmit} disabled={submitting}>
+              {submitting ? 'SENDING...' : 'SEND MAIL'}
+            </button>
+            
+            {submitMessage && (
+              <div className={`submit-message ${messageType}`}>
+                {submitMessage}
+              </div>
+            )}
 
           </div>
           <div className='contact-info-container'>
@@ -99,8 +127,9 @@ export default function Contact() {
               </div>
               <div className='data-container'>
                 <label>Phone</label>
-                <a href='tel:+8801601216268'>+8801601216268</a>
-                <a href='tel:+8801601216268'>+8801581400711</a>
+                {contact?.personalInfo.phones.map((phone, index) => (
+                  <a key={index} href={`tel:${phone}`}>{phone}</a>
+                ))}
               </div>
 
 
@@ -112,8 +141,9 @@ export default function Contact() {
               </div>
               <div className='data-container'>
                 <label>Email</label>
-                <a href='mailto:mdikram295@gmail.com'>mdikram295@gmail.com</a>
-                <a href='mailto:ikramapple123@gmail.com'>ikramapple123@gmail.com</a>
+                {contact?.personalInfo.emails.map((email, index) => (
+                  <a key={index} href={`mailto:${email}`}>{email}</a>
+                ))}
               </div>
 
 
@@ -125,8 +155,9 @@ export default function Contact() {
               </div>
               <div className='data-container'>
                 <label>Address</label>
-                <a href='#'>Boikhar, Sadar Munshiganj</a>
-                <a href='#'>Dhaka, Bangladesh</a>
+                {contact?.personalInfo.addresses.map((address, index) => (
+                  <a key={index} href='#'>{address}</a>
+                ))}
               </div>
 
 
@@ -139,3 +170,22 @@ export default function Contact() {
     </>
   );
 }
+
+export const getServerSideProps: GetServerSideProps<ContactProps> = async () => {
+  try {
+    const response = await serverApi.get('/api/contact');
+    
+    return {
+      props: {
+        contact: response.data || null
+      }
+    };
+  } catch (error) {
+    console.error('Error fetching contact data:', error);
+    return {
+      props: {
+        contact: null
+      }
+    };
+  }
+};
