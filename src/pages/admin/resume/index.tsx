@@ -58,7 +58,7 @@ export default function ResumeContentManager() {
     try {
       const response = await adminApi.get('/resume-content');
       setContent(response.data);
-    } catch (_err: unknown) {
+    } catch {
       setError('Failed to fetch content');
     }
   };

@@ -65,7 +65,7 @@ export default function HomeContentManager() {
     try {
       const response = await adminApi.get('/home-content');
       setContent(response.data);
-    } catch (_err: unknown) {
+    } catch {
       setError('Failed to fetch content');
     }
   };

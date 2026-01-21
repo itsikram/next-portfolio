@@ -90,7 +90,7 @@ export default function AboutContentManager() {
     try {
       const response = await adminApi.get('/about-content');
       setContent(response.data);
-    } catch (_err: unknown) {
+    } catch {
       setError('Failed to fetch content');
     }
   };
