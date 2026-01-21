@@ -7,7 +7,7 @@ dotenv.config();
 // Create axios instance with default configuration for browser environment
 const api = axios.create({
   baseURL: process.env.NODE_ENV === 'production' 
-    ? 'http://44.221.59.187:5000/api/'  // Use full URL with port 5000
+    ? '/api'  // Use relative path in production to avoid CORS issues
     : 'http://localhost:5000/api', // Use backend URL directly in development
   timeout: 10000,
   headers: {
@@ -15,6 +15,7 @@ const api = axios.create({
   },
   // Ensure browser-only adapter is used
   adapter: 'xhr' as const,
+  withCredentials: true, // Enable credentials for CORS
 });
 
 // Request interceptor to add auth token if available

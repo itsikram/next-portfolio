@@ -25,14 +25,25 @@ const PORT = process.env.PORT || 5000;
 // Middleware - CORS configuration for production
 const allowedOrigins = process.env.ALLOWED_ORIGINS 
   ? process.env.ALLOWED_ORIGINS.split(',')
-  : ['http://44.221.59.187:3000', 'http://44.221.59.187:5000', 'http://localhost:3000'];
+  : ['http://44.221.59.187:3000', 'http://44.221.59.187:5000', 'http://localhost:3000', 'http://localhost:3001'];
 
 app.use(cors({
   origin: allowedOrigins,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With'],
+  credentials: true,
+  preflightContinue: false,
+  optionsSuccessStatus: 200
+}));
+
+// Manual preflight handler
+app.options('*', cors({
+  origin: allowedOrigins,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With'],
   credentials: true
 }));
+
 app.use(express.json());
 
 // Set up file upload middleware

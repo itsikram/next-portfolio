@@ -7,7 +7,7 @@ dotenv.config();
 // Create axios instance for admin routes with browser compatibility
 const adminApi = axios.create({
   baseURL: process.env.NODE_ENV === 'production' 
-    ? 'http://44.221.59.187:5000/api/'  // Use full URL with port 5000
+    ? '/api'  // Use relative path in production to avoid CORS issues
     : 'http://localhost:5000/api', // Use backend URL directly in development
   timeout: 15000,
   headers: {
@@ -15,6 +15,7 @@ const adminApi = axios.create({
   },
   // Ensure browser-only adapter is used
   adapter: 'xhr' as const,
+  withCredentials: true, // Enable credentials for CORS
 });
 
 // Request interceptor to add admin token
