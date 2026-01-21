@@ -4,7 +4,7 @@ module.exports = {
       name: 'portfolio-frontend',
       script: 'npm',
       args: 'start',
-      cwd: '/var/www/portfolio',
+      cwd: './',
       env: {
         NODE_ENV: 'production',
         PORT: 3000
@@ -19,8 +19,8 @@ module.exports = {
     },
     {
       name: 'portfolio-backend',
-      script: 'server/index.js',
-      cwd: '/var/www/portfolio',
+      script: './server/index.js',
+      cwd: './',
       env: {
         NODE_ENV: 'production',
         PORT: 5000
