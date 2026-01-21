@@ -23,8 +23,8 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 
 // Middleware - CORS configuration for production
-const allowedOrigins = process.env.ALLOWED_ORIGINS 
-  ? process.env.ALLOWED_ORIGINS.split(',')
+const allowedOrigins = process.env.NEXT_PUBLIC_ALLOWED_ORIGINS 
+  ? process.env.NEXT_PUBLIC_ALLOWED_ORIGINS.split(',')
   : ['http://44.221.59.187:3000', 'http://44.221.59.187:5000', 'http://localhost:3000', 'http://localhost:3001'];
 
 app.use(cors({
