@@ -24,10 +24,10 @@ const PORT = process.env.PORT || 5000;
 // Middleware - CORS configuration for production
 const allowedOrigins = process.env.ALLOWED_ORIGINS 
   ? process.env.ALLOWED_ORIGINS.split(',')
-  : ['http://localhost:3000', 'http://your-ec2-public-ip:3000'];
+  : ['*'];
 
 app.use(cors({
-  origin: allowedOrigins,
+  origin: allowedOrigins || ['*'],
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With'],
   credentials: true
