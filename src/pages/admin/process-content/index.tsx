@@ -42,8 +42,9 @@ export default function ProcessContentManagement() {
     try {
       const response = await adminApi.get('/process-content');
       setProcessContent(response.data);
-    } catch (err: any) {
-      setError(err.response?.data?.message || 'Failed to fetch process content');
+    } catch (err: unknown) {
+      const error = err as { response?: { data?: { message?: string } } };
+      setError(error.response?.data?.message || 'Failed to fetch process content');
     } finally {
       setLoading(false);
     }
@@ -124,8 +125,9 @@ export default function ProcessContentManagement() {
       
       setSuccess('Process content saved successfully!');
       await fetchProcessContent(); // Refresh data
-    } catch (err: any) {
-      setError(err.response?.data?.message || 'Failed to save process content');
+    } catch (err: unknown) {
+      const error = err as { response?: { data?: { message?: string } } };
+      setError(error.response?.data?.message || 'Failed to save process content');
     } finally {
       setSaving(false);
     }
@@ -213,7 +215,7 @@ export default function ProcessContentManagement() {
               
               {processContent.steps.length === 0 ? (
                 <div className={styles.emptyState}>
-                  <p>No process steps added yet. Click "Add Step" to get started.</p>
+                  <p>No process steps added yet. Click &quot;Add Step&quot; to get started.</p>
                 </div>
               ) : (
                 <div className={styles.stepsContainer}>

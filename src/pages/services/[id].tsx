@@ -1,6 +1,5 @@
 import Head from 'next/head';
 import { useState } from 'react';
-import { useRouter } from 'next/router';
 import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowLeft, Clock, DollarSign, CheckCircle, Send, Calendar, Users, Award, TrendingUp, Shield, Zap } from 'lucide-react';
@@ -112,7 +111,7 @@ export default function SingleService({ service, relatedServices }: ServiceProps
     return (
       <div className={styles.errorContainer}>
         <h2>Service Not Found</h2>
-        <p>The service you're looking for doesn't exist or has been removed.</p>
+        <p>The service you&apos;re looking for doesn&apos;t exist or has been removed.</p>
         <Link href="/services" className={styles.backButton}>
           <ArrowLeft size={20} />
           Back to Services
@@ -253,7 +252,7 @@ export default function SingleService({ service, relatedServices }: ServiceProps
                 <div className={styles.deliverablesSection}>
                   <h2 className={styles.sectionTitle}>
                     <Award size={24} />
-                    What You'll Get
+                    What You&apos;ll Get
                   </h2>
                   {service.deliverables && service.deliverables.length > 0 ? (
                     <div className={styles.deliverablesList}>
@@ -266,7 +265,7 @@ export default function SingleService({ service, relatedServices }: ServiceProps
                     </div>
                   ) : (
                     <div className={styles.emptyState}>
-                      <p>Deliverables information will be updated soon. Contact me for more details about what you'll receive with this service.</p>
+                      <p>Deliverables information will be updated soon. Contact me for more details about what you&apos;ll receive with this service.</p>
                     </div>
                   )}
                 </div>
@@ -333,7 +332,7 @@ export default function SingleService({ service, relatedServices }: ServiceProps
 
           <div className={styles.ctaSection}>
             <h2>Ready to Get Started?</h2>
-            <p>Let's discuss how I can help you with this service and bring your project to life.</p>
+            <p>Let&apos;s discuss how I can help you with this service and bring your project to life.</p>
             <div className={styles.ctaButtons}>
               <button 
                 className={styles.primaryButton}

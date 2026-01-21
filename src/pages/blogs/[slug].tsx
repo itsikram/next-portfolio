@@ -1,5 +1,4 @@
 import Head from 'next/head';
-import { useRouter } from 'next/router';
 import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowLeft, Calendar, User, Tag } from 'lucide-react';
@@ -39,7 +38,7 @@ export default function BlogPost({ blog }: BlogPostProps) {
     return (
       <div className={styles.blogPostError}>
         <h2>Blog Post Not Found</h2>
-        <p>The blog post you're looking for doesn't exist or has been removed.</p>
+        <p>The blog post you&apos;re looking for doesn&apos;t exist or has been removed.</p>
         <Link href="/blogs" className={styles.backToBlogs}>
           <ArrowLeft size={20} />
           Back to Blogs

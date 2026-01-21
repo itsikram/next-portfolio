@@ -304,7 +304,7 @@ export default function ServiceForm() {
               </div>
               {service.features.length === 0 && (
                 <p style={{ color: '#64748b', fontSize: '0.9rem', fontStyle: 'italic' }}>
-                  No features added yet. Add features to highlight what's included in this service.
+                  No features added yet. Add features to highlight what&apos;s included in this service.
                 </p>
               )}
             </div>

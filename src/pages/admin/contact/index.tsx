@@ -54,7 +54,7 @@ export default function ContactManager() {
     try {
       const response = await adminApi.get('/contact');
       setContent(response.data);
-    } catch (err: unknown) {
+    } catch (_err: unknown) {
       setError('Failed to fetch contact content');
     }
   };
