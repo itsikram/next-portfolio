@@ -3,11 +3,16 @@
 # Kill existing PM2 processes
 pm2 kill
 
+# Build the Next.js application first
+echo "Building Next.js application..."
+npm run build
+
 # Start backend
+echo "Starting backend..."
 pm2 start server/index.js --name "portfolio-backend" --env production
 
 # Start frontend (after build)
-npm run build
+echo "Starting frontend..."
 pm2 start npm --name "portfolio-frontend" -- start --env production
 
 # Show status
